@@ -1,6 +1,8 @@
 import { FaBuilding } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
 import { tv } from "tailwind-variants";
+import { selectActualStage } from "../../slices/stages";
 
 const stageCards = tv({
 	base: "size-14 text-white flex justify-center items-center rounded-[20px] shadow-stagesCards cursor-pointer",
@@ -19,16 +21,15 @@ interface StageCardsProps {
 	stageCard: number;
 	isCompleted?: boolean;
 	actualStage: number;
-	maxStage: number;
-	changeActualStage: (stageCard: number) => void;
 }
 
 const StageCards = ({
 	stageCard,
 	isCompleted,
 	actualStage,
-	changeActualStage,
 }: StageCardsProps) => {
+	const dispatch = useDispatch();
+
 	const backgroundCard =
 		stageCard === 1 || actualStage > 1 ? "default" : "disabled";
 
@@ -40,7 +41,7 @@ const StageCards = ({
 			<button
 				type="button"
 				className={stageCards({ active: backgroundCard })}
-				onClick={() => changeActualStage(stageCard)}
+				onClick={() => dispatch(selectActualStage(stageCard))}
 				disabled={actualStage < 2}
 			>
 				<FaBuilding className="text-2xl" />

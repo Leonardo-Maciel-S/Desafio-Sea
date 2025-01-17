@@ -1,11 +1,12 @@
-import { useState } from "react";
 import SpaceBetweenCards from "./SpaceBetweenCards";
 import StageCards from "./StageCards";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const StagesModal = () => {
-	const stages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-	const maxStage = 1;
-	const [actualStage, setActualPage] = useState(1);
+	const { stages, actualStage } = useSelector(
+		(state: RootState) => state.stages,
+	);
 
 	return (
 		<nav className="w-full min-h-[156px] pt-2 flex items-center justify-center px-6 bg-white rounded-[20px]">
@@ -17,8 +18,6 @@ const StagesModal = () => {
 								stageCard={item}
 								isCompleted={actualStage > item}
 								actualStage={actualStage}
-								maxStage={maxStage}
-								changeActualStage={setActualPage}
 							/>
 							<SpaceBetweenCards />
 						</>
@@ -31,8 +30,6 @@ const StagesModal = () => {
 						stageCard={item}
 						isCompleted={actualStage > item}
 						actualStage={actualStage}
-						maxStage={maxStage}
-						changeActualStage={setActualPage}
 					/>
 				);
 			})}
