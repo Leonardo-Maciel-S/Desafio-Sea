@@ -35,7 +35,11 @@ const Button = ({
 	...rest
 }: ButtonProps) => {
 	return (
-		<button className={button({ flex1, textSize, isEnable })} {...rest}>
+		<button
+			className={button({ flex1, textSize, isEnable })}
+			disabled={!isEnable}
+			{...rest}
+		>
 			{children}
 		</button>
 	);

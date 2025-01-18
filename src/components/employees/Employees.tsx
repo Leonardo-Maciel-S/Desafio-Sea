@@ -1,6 +1,18 @@
+import { useState } from "react";
 import Button from "../buttons/Button";
 
 const Employees = () => {
+	const [onlyActive, setOnlyActives] = useState(false);
+
+	const handleClickFilter = () => {
+		if (onlyActive) {
+			setOnlyActives(false);
+			return;
+		}
+
+		setOnlyActives(true);
+	};
+
 	return (
 		<div className="rounded-default w-full overflow-hidden">
 			<header className="bg-default text-white px-5 py-2">
@@ -8,11 +20,17 @@ const Employees = () => {
 			</header>
 			<div>
 				<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border  ">
-					<Button textSize="base16">+ Adicionar Funcionário</Button>
+					<Button isEnable textSize="base16">
+						+ Adicionar Funcionário
+					</Button>
 					<div className="flex justify-between">
 						<div className="flex gap-6">
-							<Button>Ver apenas ativos</Button>
-							<Button isEnable={false}>Limpar filtros</Button>
+							<Button isEnable={!onlyActive} onClick={handleClickFilter}>
+								Ver apenas ativos
+							</Button>
+							<Button isEnable={onlyActive} onClick={handleClickFilter}>
+								Limpar filtros
+							</Button>
 						</div>
 
 						<span className="text-darkGray text-sm font-normal">
