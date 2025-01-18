@@ -20,7 +20,7 @@ const SideIcons = ({ isSelected, icon: Icon, className }: SideIcons) => {
 			/>
 
 			<div
-				className={`flex items-center justify-center size-8 rounded-[10px] text-iconSide cursor-pointer ${opacityBackground} bg-white hover:opacity-100`}
+				className={`flex items-center justify-center size-8 rounded-[10px] text-defaultBlue cursor-pointer ${opacityBackground} bg-white hover:opacity-100`}
 			>
 				<Icon className="text-xl" />
 			</div>

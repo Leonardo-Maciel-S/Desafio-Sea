@@ -22,7 +22,7 @@ const NavBar = () => {
 				<div className="relative">
 					<SideIcons icon={FaRegBell} />
 					<div className="absolute -right-2 -bottom-3 w-5 h-5 bg-white rounded-[10px] flex justify-center items-center">
-						<FaRegFileAlt className="text-iconSide text-xs " />
+						<FaRegFileAlt className="text-defaultBlue text-xs " />
 					</div>
 				</div>
 				<SideIcons icon={FaUndo} />

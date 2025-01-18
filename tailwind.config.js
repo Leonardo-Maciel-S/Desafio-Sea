@@ -10,8 +10,9 @@ export default {
 			},
 
 			textColor: {
-				iconSide: "#4fa1c2",
+				defaultBlue: "#4fa1c2",
 				mediumGray: "#959595",
+				darkGray: "#3A3A3A",
 			},
 
 			width: {
@@ -23,18 +24,22 @@ export default {
 
 			borderColor: {
 				defaultBlue: "#4fa1c2",
+				mediumGray: "#959595",
 			},
 
 			boxShadow: {
 				stagesCards: "0px 6px 8px rgba(0, 0, 0, 0.3)", // opacity 30
-				stagesCardsHover: "0px 6px 8px rgba(0, 0, 0, 0.4)", 
+				stagesCardsHover: "0px 6px 8px rgba(0, 0, 0, 0.4)",
 			},
 			screens: {
-				phone: '360px'
+				phone: "360px",
 			},
 			borderRadius: {
-				default: '20px'
-			}
+				default: "20px",
+			},
+			spacing: {
+				teste: "40px",
+			},
 		},
 	},
 	plugins: [],
