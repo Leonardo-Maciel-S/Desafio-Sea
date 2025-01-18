@@ -9,7 +9,7 @@ const StagesModal = () => {
 	);
 
 	return (
-		<nav className="w-full min-h-[156px] pt-2 flex items-center justify-center px-6 bg-white rounded-[20px]">
+		<nav className="w-full min-h-[156px] pt-2 flex items-center justify-start px-6 sm:pr-16 bg-white rounded-[20px] flex-wrap">
 			{stages.map((item) => {
 				if (item < stages.length) {
 					return (
