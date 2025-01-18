@@ -26,9 +26,15 @@ export default {
 			},
 
 			boxShadow: {
-				stagesCards: "0px 6px 8px #0000004d", // opacity 30
-				stagesCardsHover: "0px 6px 8px #00000059", // opacity 35
+				stagesCards: "0px 6px 8px rgba(0, 0, 0, 0.3)", // opacity 30
+				stagesCardsHover: "0px 6px 8px rgba(0, 0, 0, 0.4)", 
 			},
+			screens: {
+				phone: '360px'
+			},
+			borderRadius: {
+				default: '20px'
+			}
 		},
 	},
 	plugins: [],
