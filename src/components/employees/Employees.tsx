@@ -1,7 +1,20 @@
 import { useState } from "react";
 import Button from "../buttons/Button";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../store";
+import {
+	completeFirstStage,
+	nextStage,
+	previousStage,
+} from "../../slices/stages";
 
 const Employees = () => {
+	const { actualStage, completedFirstStage } = useSelector(
+		(state: RootState) => state.stages,
+	);
+
+	const dispatch = useDispatch();
+
 	const [onlyActive, setOnlyActives] = useState(false);
 
 	const handleClickFilter = () => {
@@ -37,6 +50,21 @@ const Employees = () => {
 							Ativos 2/4
 						</span>
 					</div>
+					<Button isEnable onClick={() => dispatch(completeFirstStage())}>
+						Concluir etapa
+					</Button>
+					<Button
+						onClick={() => dispatch(nextStage())}
+						isEnable={completedFirstStage}
+					>
+						Próximo passo
+					</Button>
+					<Button
+						onClick={() => dispatch(previousStage())}
+						isEnable={actualStage >= 2}
+					>
+						Passo anterior
+					</Button>
 				</div>
 			</div>
 		</div>

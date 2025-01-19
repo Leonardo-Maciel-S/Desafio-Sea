@@ -6,7 +6,7 @@ import EmployeesPage from "./pages/EmployeesPage";
 function App() {
 	return (
 		<>
-			<main className="flex items-center gap-10">
+			<main className="flex items-center gap-10 z-10">
 				<NavBar />
 				<BrowserRouter>
 					<Routes>
@@ -16,7 +16,7 @@ function App() {
 				</BrowserRouter>
 			</main>
 
-			<div className="fixed -bottom-14 -right-14 w-[457px]">
+			<div className="fixed -bottom-14 -right-14 w-[457px] -z-10">
 				<img src={backgroundImg} alt="" />
 			</div>
 		</>

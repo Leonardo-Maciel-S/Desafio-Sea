@@ -1,20 +1,18 @@
 import { FaBuilding } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 
 import { tv } from "tailwind-variants";
-import { selectActualStage } from "../../slices/stages";
+import type { ButtonHTMLAttributes } from "react";
 
 const stageCards = tv({
-	base: "size-14 text-white flex justify-center items-center rounded-[20px] shadow-stagesCards cursor-pointer border-black",
+	base: "size-14 text-white flex justify-center items-center rounded-[20px] shadow-stagesCards",
 	variants: {
 		active: {
 			default:
-				"bg-default hover:border-2 hover:border-black hover:shadow-stagesCardsHover",
+				"bg-default hover:border-2 hover:border-black hover:shadow-stagesCardsHover cursor-pointer ",
 			disabled: "bg-stageDisabled cursor-default",
 		},
 		isActualStage: {
-			true: "border-2 cursor-default shadow-stagesCards",
-			false: "hover:scale-105",
+			true: "border-2 cursor-default shadow-stagesCards border-black hover:shadow-stagesCards",
 		},
 	},
 	defaultVariants: {
@@ -23,24 +21,26 @@ const stageCards = tv({
 	},
 });
 
-interface StageCardsProps {
+interface StageCardsProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	stageCard: number;
 	isCompleted?: boolean;
 	actualStage: number;
+	completedFirstStage: boolean;
 }
 
 const StageCards = ({
 	stageCard,
 	isCompleted,
 	actualStage,
+	completedFirstStage,
+	...rest
 }: StageCardsProps) => {
-	const dispatch = useDispatch();
-
 	const backgroundCard =
-		stageCard === 1 || actualStage > 1 ? "default" : "disabled";
+		stageCard === 1 || actualStage > 1 || completedFirstStage
+			? "default"
+			: "disabled";
 
-	const textStage =
-		stageCard === 1 || actualStage > 1 ? "text-defaultBlue" : "text-mediumGray";
+	const textStage = stageCard === 1 ? "text-defaultBlue" : "text-mediumGray";
 
 	const hasBorder = actualStage === stageCard;
 
@@ -52,14 +52,14 @@ const StageCards = ({
 					active: backgroundCard,
 					isActualStage: hasBorder,
 				})}
-				onClick={() => dispatch(selectActualStage(stageCard))}
-				disabled={actualStage < 2 || actualStage == stageCard}
+				disabled={actualStage < 2 || actualStage === stageCard}
+				{...rest}
 			>
 				<FaBuilding className="text-2xl" />
 			</button>
 
 			<div className="flex flex-col items-center text-center font-medium text-xs">
-				<span className={textStage}>item{stageCard}</span>
+				<span className={textStage}>item {stageCard}</span>
 				{isCompleted && <span>Concluído</span>}
 			</div>
 		</div>
