@@ -52,7 +52,7 @@ const StageCards = ({
 					active: backgroundCard,
 					isActualStage: hasBorder,
 				})}
-				disabled={actualStage < 2 || actualStage === stageCard}
+				disabled={!completedFirstStage || actualStage === stageCard}
 				{...rest}
 			>
 				<FaBuilding className="text-2xl" />

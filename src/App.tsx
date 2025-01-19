@@ -2,16 +2,22 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import backgroundImg from "./assets/backgroundImg.svg";
 import NavBar from "./components/navBar/NavBar";
 import EmployeesPage from "./pages/EmployeesPage";
+import ComingSoon from "./pages/comingSoon";
 
 function App() {
 	return (
 		<>
-			<main className="flex items-center gap-10 z-10">
-				<NavBar />
+			<main className="flex items-center gap-10 z-10 pr-10">
 				<BrowserRouter>
+					<NavBar />
 					<Routes>
-						<Route path="/funcionarios" element={<EmployeesPage />} />
-						<Route path="*" element={<Navigate to={"/funcionarios"} />} />
+						<Route path="/home" element={<ComingSoon />} />
+						<Route path="/employees" element={<EmployeesPage />} />
+						<Route path="/network" element={<ComingSoon />} />
+						<Route path="/notifications" element={<ComingSoon />} />
+						<Route path="/reload" element={<ComingSoon />} />
+						<Route path="/user" element={<ComingSoon />} />
+						<Route path="*" element={<Navigate to={"/employees"} />} />
 					</Routes>
 				</BrowserRouter>
 			</main>

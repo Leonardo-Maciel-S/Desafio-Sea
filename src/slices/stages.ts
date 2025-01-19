@@ -33,7 +33,7 @@ export const stagesSlice = createSlice({
 				state.completedFirstStage = false;
 			}
 
-			if (state.actualStage >= 1 && state.actualStage < 9) {
+			if (state.actualStage >= 1 && state.actualStage <= 9) {
 				state.actualStage = action.payload;
 			}
 		},

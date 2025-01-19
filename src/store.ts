@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { stagesSliceReducer } from "./slices/stages";
+import { pagesSliceReducer } from "./slices/pages";
 
 export const store = configureStore({
 	reducer: {
 		stages: stagesSliceReducer,
+		pages: pagesSliceReducer,
 	},
 });
 

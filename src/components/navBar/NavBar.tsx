@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import SideIcons from "./sideIcons";
 
 import {
@@ -16,17 +17,17 @@ const NavBar = () => {
 			<div className="w-14 h-[41px] bg-white absolute top-[50px]" />
 
 			<div className="w-11  bg-transparent flex flex-col gap-6 ">
-				<SideIcons icon={FaBuilding} />
-				<SideIcons isSelected icon={FaEdit} />
-				<SideIcons icon={FaNetworkWired} />
+				<SideIcons name="home" icon={FaBuilding} />
+				<SideIcons name="employees" icon={FaEdit} />
+				<SideIcons name="network" icon={FaNetworkWired} />
 				<div className="relative">
-					<SideIcons icon={FaRegBell} />
+					<SideIcons name="notifications" icon={FaRegBell} />
 					<div className="absolute -right-2 -bottom-3 w-5 h-5 bg-white rounded-[10px] flex justify-center items-center">
 						<FaRegFileAlt className="text-defaultBlue text-xs " />
 					</div>
 				</div>
-				<SideIcons icon={FaUndo} />
-				<SideIcons icon={FaUser} />
+				<SideIcons name="reload" icon={FaUndo} />
+				<SideIcons name="user" icon={FaUser} />
 			</div>
 		</nav>
 	);
