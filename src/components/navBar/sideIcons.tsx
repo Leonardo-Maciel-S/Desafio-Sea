@@ -4,6 +4,7 @@ import type { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPage } from "../../slices/pages";
 import { Link } from "react-router";
+import { selectActualStage } from "../../slices/stages";
 
 interface SideIcons {
 	name: string;
@@ -26,7 +27,12 @@ const SideIcons = ({ name, icon: Icon, className }: SideIcons) => {
 				type="button"
 				className={`group flex items-center gap-2 ${className}`}
 				disabled={isSelected}
-				onClick={() => dispatch(selectPage(name))}
+				onClick={() => {
+					if (name !== "employees") {
+						dispatch(selectActualStage(1));
+					}
+					dispatch(selectPage(name));
+				}}
 			>
 				<div
 					className={`w-1 h-8 group-hover:bg-white ${isSelected ? "bg-white" : "bg-transparent"}`}
