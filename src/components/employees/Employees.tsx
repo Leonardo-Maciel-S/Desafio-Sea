@@ -7,6 +7,7 @@ import {
 	nextStage,
 	previousStage,
 } from "../../slices/stages";
+import EmployeeCard from "../employeeCard/EmployeeCard";
 
 const Employees = () => {
 	const { actualStage, completedFirstStage } = useSelector(
@@ -32,7 +33,7 @@ const Employees = () => {
 				<h2 className="text-[28px]">Funcionário&#40;s&#41;</h2>
 			</header>
 			<div>
-				<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border  ">
+				<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white ">
 					<Button isEnable textSize="base16">
 						+ Adicionar Funcionário
 					</Button>
@@ -50,21 +51,10 @@ const Employees = () => {
 							Ativos 2/4
 						</span>
 					</div>
-					<Button isEnable onClick={() => dispatch(completeFirstStage())}>
-						Concluir etapa
-					</Button>
-					<Button
-						onClick={() => dispatch(nextStage())}
-						isEnable={completedFirstStage}
-					>
-						Próximo passo
-					</Button>
-					<Button
-						onClick={() => dispatch(previousStage())}
-						isEnable={actualStage >= 2}
-					>
-						Passo anterior
-					</Button>
+
+					<EmployeeCard active />
+					<EmployeeCard />
+
 				</div>
 			</div>
 		</div>

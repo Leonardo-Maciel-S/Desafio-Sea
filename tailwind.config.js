@@ -7,6 +7,7 @@ export default {
 				default: "#4fa1c2",
 				sideIcons: "#FFFFFF opacity-80",
 				stageDisabled: "#DBDBDB",
+				blueSky: "#E0ECF2",
 			},
 
 			textColor: {

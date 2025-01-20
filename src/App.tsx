@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import backgroundImg from "./assets/backgroundImg.svg";
 import NavBar from "./components/navBar/NavBar";
 import EmployeesPage from "./pages/EmployeesPage";
-import ComingSoon from "./pages/comingSoon";
+import ComingSoon from "./pages/ComingSoon";
 
 function App() {
 	return (
