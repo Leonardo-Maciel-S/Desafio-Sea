@@ -1,12 +1,17 @@
 import { useState } from "react";
 import Button from "../buttons/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import EmployeeCard from "../employeeCard/EmployeeCard";
 
 import Switch from "../Switch";
+import type { RootState } from "../../store";
+import { nextStage } from "../../slices/stages";
 
 const Employees = () => {
+	const { completedFirstStage } = useSelector(
+		(state: RootState) => state.stages,
+	);
 	const dispatch = useDispatch();
 
 	const [onlyActive, setOnlyActives] = useState(false);
@@ -21,7 +26,7 @@ const Employees = () => {
 	};
 
 	return (
-		<div className="rounded-default w-full overflow-hidden">
+		<div className="rounded-default w-full overflow-hidden ">
 			<header className="bg-default text-white px-5 py-2">
 				<h2 className="text-[28px]">Funcionário&#40;s&#41;</h2>
 			</header>
@@ -45,16 +50,27 @@ const Employees = () => {
 						</span>
 					</div>
 
-					<EmployeeCard active />
-					<EmployeeCard />
-					<EmployeeCard />
-					<EmployeeCard active />
+					<EmployeeCard name="Daniel Alves da Silva" active />
+					<EmployeeCard name="Giselle Torres Lopes" />
+					<EmployeeCard name="Ana Bispo dos Santos" />
+					<EmployeeCard name="Regina Elisa Souza" active />
 
 					<div className="w-full flex justify-end items-center gap-2 text-sm text-darkGray">
 						<span>A etapa está concluída?</span>
 						<Switch on="Sim" off="Não" />
 					</div>
 				</div>
+			</div>
+
+			<div className="my-8 w-full flex justify-end">
+				<Button
+					isEnable={completedFirstStage}
+					bgFullDisable={!completedFirstStage}
+					bgFull
+					onClick={() => dispatch(nextStage())}
+				>
+					Próximo passo
+				</Button>
 			</div>
 		</div>
 	);

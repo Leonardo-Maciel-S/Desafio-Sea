@@ -8,6 +8,7 @@ export default {
 				sideIcons: "#FFFFFF opacity-80",
 				stageDisabled: "#DBDBDB",
 				blueSky: "#E0ECF2",
+				mediumGray: "#959595",
 			},
 
 			textColor: {

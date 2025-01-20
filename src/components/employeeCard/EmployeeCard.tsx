@@ -2,16 +2,17 @@ import Fields from "./Fields";
 
 interface EmployeeCardProps {
 	active?: boolean;
+	name: string;
 }
 
-const EmployeeCard = ({ active }: EmployeeCardProps) => {
+const EmployeeCard = ({ active, name }: EmployeeCardProps) => {
 	const bgCard = active ? "bg-blueSky " : "bg-[#F2F2F2]";
 	return (
 		<div
 			className={`${bgCard} overflow-hidden rounded-[10px] flex justify-between`}
 		>
 			<div className="flex flex-col gap-2 m-4">
-				<h2 className="text-2xl text-[#707070]">Daniel Alves da Silva</h2>
+				<h2 className="text-2xl text-[#707070]">{name}</h2>
 				<div className="flex gap-5 ">
 					<Fields text="000.000.000-99" />
 					<Fields text="Ativo 00" />

@@ -8,9 +8,9 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
-				<main className="z-10 pr-10 w-screen min-h-full overflow-x-hidden">
+				<main className="z-10 xl:pr-10 w-screen min-h-full overflow-x-hidden">
 					<NavBar />
-					<div className="pl-24 h-max flex flex-col mb-10">
+					<div className="pl-24 h-max flex flex-col">
 						<Routes>
 							<Route path="/home" element={<ComingSoon />} />
 							<Route path="/employees" element={<EmployeesPage />} />
