@@ -1,19 +1,12 @@
 import { useState } from "react";
 import Button from "../buttons/Button";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../store";
-import {
-	completeFirstStage,
-	nextStage,
-	previousStage,
-} from "../../slices/stages";
+import { useDispatch } from "react-redux";
+
 import EmployeeCard from "../employeeCard/EmployeeCard";
 
-const Employees = () => {
-	const { actualStage, completedFirstStage } = useSelector(
-		(state: RootState) => state.stages,
-	);
+import Switch from "../Switch";
 
+const Employees = () => {
 	const dispatch = useDispatch();
 
 	const [onlyActive, setOnlyActives] = useState(false);
@@ -54,7 +47,13 @@ const Employees = () => {
 
 					<EmployeeCard active />
 					<EmployeeCard />
+					<EmployeeCard />
+					<EmployeeCard active />
 
+					<div className="w-full flex justify-end items-center gap-2 text-sm text-darkGray">
+						<span>A etapa está concluída?</span>
+						<Switch on="Sim" off="Não" />
+					</div>
 				</div>
 			</div>
 		</div>

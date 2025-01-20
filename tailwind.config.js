@@ -41,6 +41,17 @@ export default {
 			spacing: {
 				teste: "40px",
 			},
+
+			keyframes: {
+				onePulse: {
+					"0%, 50%": { opacity: "0" },
+					"51%, 100%": { opacity: "100" },
+				},
+			},
+
+			animation: {
+				onePulse: "onePulse 300ms ease-in",
+			},
 		},
 	},
 	plugins: [],

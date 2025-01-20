@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import SideIcons from "./sideIcons";
 
 import {
@@ -13,7 +12,7 @@ import {
 
 const NavBar = () => {
 	return (
-		<nav className="min-w-14 h-[100vh] bg-default rounded-e-2xl flex flex-col justify-center">
+		<nav className="min-w-14 h-[100vh] bg-default rounded-e-2xl flex flex-col justify-center absolute	top-0 left-0">
 			<div className="w-14 h-[41px] bg-white absolute top-[50px]" />
 
 			<div className="w-11  bg-transparent flex flex-col gap-6 ">

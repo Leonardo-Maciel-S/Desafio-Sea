@@ -7,24 +7,25 @@ import ComingSoon from "./pages/ComingSoon";
 function App() {
 	return (
 		<>
-			<main className="flex items-center gap-10 z-10 pr-10">
-				<BrowserRouter>
+			<BrowserRouter>
+				<main className="z-10 pr-10 w-screen min-h-full overflow-x-hidden">
 					<NavBar />
-					<Routes>
-						<Route path="/home" element={<ComingSoon />} />
-						<Route path="/employees" element={<EmployeesPage />} />
-						<Route path="/network" element={<ComingSoon />} />
-						<Route path="/notifications" element={<ComingSoon />} />
-						<Route path="/reload" element={<ComingSoon />} />
-						<Route path="/user" element={<ComingSoon />} />
-						<Route path="*" element={<Navigate to={"/employees"} />} />
-					</Routes>
-				</BrowserRouter>
-			</main>
-
-			<div className="fixed -bottom-14 -right-14 w-[457px] -z-10">
-				<img src={backgroundImg} alt="" />
-			</div>
+					<div className="pl-24 h-max flex flex-col mb-10">
+						<Routes>
+							<Route path="/home" element={<ComingSoon />} />
+							<Route path="/employees" element={<EmployeesPage />} />
+							<Route path="/network" element={<ComingSoon />} />
+							<Route path="/notifications" element={<ComingSoon />} />
+							<Route path="/reload" element={<ComingSoon />} />
+							<Route path="/user" element={<ComingSoon />} />
+							<Route path="*" element={<Navigate to={"/employees"} />} />
+						</Routes>
+					</div>
+					<div className="absolute -bottom-14 -right-14 w-[457px] -z-10">
+						<img src={backgroundImg} alt="" />
+					</div>
+				</main>
+			</BrowserRouter>
 		</>
 	);
 }
