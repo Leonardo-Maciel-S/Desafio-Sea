@@ -2,7 +2,7 @@ import type { HTMLAttributes } from "react";
 import { tv } from "tailwind-variants";
 
 const button = tv({
-	base: "border border-defaultBlue rounded-[10px] text-center",
+	base: "text-defaultBlue border border-defaultBlue rounded-[10px] text-center",
 	variants: {
 		textSize: {
 			default: "text-sm px-10 py-[10px]",
@@ -16,7 +16,7 @@ const button = tv({
 		},
 		bgFull: {
 			true: "bg-default text-white font-bold border-none px-14",
-			false: "bg-white text-defaultBlue",
+			false: "bg-white",
 		},
 		bgFullDisable: {
 			true: "bg-mediumGray",

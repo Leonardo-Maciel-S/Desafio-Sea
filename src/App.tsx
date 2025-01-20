@@ -3,6 +3,7 @@ import backgroundImg from "./assets/backgroundImg.svg";
 import NavBar from "./components/navBar/NavBar";
 import EmployeesPage from "./pages/EmployeesPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
+import NextStage from "./pages/NextStage";
 
 function App() {
 	return (
@@ -14,6 +15,8 @@ function App() {
 						<Routes>
 							<Route path="/home" element={<ComingSoonPage />} />
 							<Route path="/employees" element={<EmployeesPage />} />
+							<Route path="/employees/:stagePath" element={<NextStage />} />
+
 							<Route path="/network" element={<ComingSoonPage />} />
 							<Route path="/notifications" element={<ComingSoonPage />} />
 							<Route path="/reload" element={<ComingSoonPage />} />

@@ -14,7 +14,7 @@ const StagesModal = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<nav className="w-full min-h-[156px] pt-2 flex items-center justify-start px-6 sm:pr-16 bg-white rounded-[20px] flex-wrap">
+		<nav className="w-full min-h-[156px] flex items-center justify-start pt-2 px-6 sm:pr-16 bg-white rounded-[20px] flex-wrap">
 			<StageCards
 				stageCard={1}
 				isCompleted={completedFirstStage}

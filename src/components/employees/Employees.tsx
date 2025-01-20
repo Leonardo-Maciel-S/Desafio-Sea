@@ -30,8 +30,8 @@ const Employees = () => {
 			<header className="bg-default text-white px-5 py-2">
 				<h2 className="text-[28px]">Funcionário&#40;s&#41;</h2>
 			</header>
-			<div>
-				<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white ">
+			<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white rounded-b-[20px]">
+				<div className="flex flex-col justify-center gap-4 ">
 					<Button isEnable textSize="base16">
 						+ Adicionar Funcionário
 					</Button>
@@ -49,16 +49,18 @@ const Employees = () => {
 							Ativos 2/4
 						</span>
 					</div>
+				</div>
 
+				<div className="flex flex-col gap-4 py-6">
 					<EmployeeCard name="Daniel Alves da Silva" active />
 					<EmployeeCard name="Giselle Torres Lopes" />
 					<EmployeeCard name="Ana Bispo dos Santos" />
 					<EmployeeCard name="Regina Elisa Souza" active />
+				</div>
 
-					<div className="w-full flex justify-end items-center gap-2 text-sm text-darkGray">
-						<span>A etapa está concluída?</span>
-						<Switch on="Sim" off="Não" />
-					</div>
+				<div className="w-full flex justify-end items-center gap-2 text-sm text-darkGray font-regular">
+					<span>A etapa está concluída?</span>
+					<Switch on="Sim" off="Não" />
 				</div>
 			</div>
 
