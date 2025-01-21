@@ -1,0 +1,112 @@
+{
+  "employee": [
+    {
+      "id": "1",
+      "active": true,
+      "name": "Daniel Alves da Silva",
+      "cpf": "000.000.000-99",
+      "RG": "000001",
+      "gender": "masculino",
+      "birth": "2000-10-14",
+      "job": "Frontend",
+      "useEPI": [
+        {
+          "activity": "atividade 1",
+          "epi": "Calçado de segurança",
+          "ca": "9356"
+        }
+      ],
+      "medicalCertificate": "documento.pdf"
+    },
+    {
+      "id": "1",
+      "active": true,
+      "name": "Giselle Torres Lopes",
+      "cpf": "000.000.000-88",
+      "RG": "000001",
+      "gender": "feminino",
+      "birth": "2002-06-10",
+      "job": "Frontend",
+      "useEPI": [
+        {
+          "activity": "atividade 2",
+          "epi": "bota",
+          "ca": "9354"
+        }
+      ],
+      "medicalCertificate": "documento.pdf"
+    },
+    {
+      "id": "1",
+      "active": true,
+      "name": "Ana Bispo dos Santos",
+      "cpf": "000.000.000-77",
+      "RG": "000001",
+      "gender": "feminino",
+      "birth": "2002-03-05",
+      "job": "backend",
+      "useEPI": [
+        {
+          "activity": "atividade 3",
+          "epi": "cinto",
+          "ca": "9356"
+        }
+      ],
+      "medicalCertificate": "documento.pdf"
+    },
+    {
+      "id": "1",
+      "active": true,
+      "name": "Regina Elisa Souza",
+      "cpf": "000.000.000-66",
+      "RG": "000001",
+      "gender": "feminino",
+      "birth": "2002-08-08",
+      "job": "backend",
+      "useEPI": [
+        {
+          "activity": "atividade 1",
+          "epi": "cinto",
+          "ca": "9354"
+        }
+      ],
+      "medicalCertificate": "documento.pdf"
+    },
+    {
+      "id": "ecfc",
+      "active": true,
+      "name": "Test post",
+      "cpf": "000.000.000-99",
+      "RG": "000001",
+      "gender": "masculino",
+      "birth": "2000-10-14",
+      "job": "Frontend",
+      "useEPI": [
+        {
+          "activity": "atividade 1",
+          "epi": "Calçado de segurança",
+          "ca": "9356"
+        }
+      ],
+      "medicalCertificate": "documento.pdf"
+    },
+    {
+      "id": "8f8d",
+      "active": true,
+      "name": "Test post 2",
+      "cpf": "000.000.000-99",
+      "RG": "000001",
+      "gender": "masculino",
+      "birth": "2000-10-14",
+      "job": "Frontend",
+      "useEPI": [
+        {
+          "activity": "atividade 1",
+          "epi": "Calçado de segurança",
+          "ca": "9356"
+        }
+      ],
+      "medicalCertificate": "documento.pdf"
+    }
+  ]
+}
