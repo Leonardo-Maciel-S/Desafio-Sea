@@ -14,13 +14,24 @@ function App() {
 					<div className="pl-24 h-max flex flex-col">
 						<Routes>
 							<Route path="/home" element={<ComingSoonPage />} />
-							<Route path="/employees" element={<EmployeesPage />} />
-							<Route path="/employees/:stagePath" element={<NextStage />} />
+
+							<Route path="/employees/">
+								<Route index element={<EmployeesPage />} />
+								<Route path="/employees/2" element={<NextStage />} />
+								<Route path="/employees/3" element={<NextStage />} />
+								<Route path="/employees/4" element={<NextStage />} />
+								<Route path="/employees/5" element={<NextStage />} />
+								<Route path="/employees/6" element={<NextStage />} />
+								<Route path="/employees/7" element={<NextStage />} />
+								<Route path="/employees/8" element={<NextStage />} />
+								<Route path="/employees/9" element={<NextStage />} />
+							</Route>
 
 							<Route path="/network" element={<ComingSoonPage />} />
 							<Route path="/notifications" element={<ComingSoonPage />} />
 							<Route path="/reload" element={<ComingSoonPage />} />
 							<Route path="/user" element={<ComingSoonPage />} />
+
 							<Route path="*" element={<Navigate to={"/employees"} />} />
 						</Routes>
 					</div>

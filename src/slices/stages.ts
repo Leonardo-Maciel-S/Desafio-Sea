@@ -26,6 +26,11 @@ export const stagesSlice = createSlice({
 			if (state.actualStage >= 1 && state.actualStage <= 9) {
 				state.actualStage -= 1;
 			}
+
+			if (state.actualStage === 1) {
+				state.actualStage = 1;
+				state.completedFirstStage = false;
+			}
 		},
 		selectActualStage: (state: Stages, action: PayloadAction<number>) => {
 			if (action.payload === 1) {

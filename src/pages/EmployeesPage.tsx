@@ -2,9 +2,11 @@ import Employees from "../components/employees/Employees";
 import Profile from "../components/profile/Profile";
 import StagesModal from "../components/stages/StagesModal";
 import NewEmployee from "../components/employees/NewEmployee";
+
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../store";
 import { useEffect } from "react";
+import type { AppDispatch, RootState } from "../store";
+
 import { getAllEmployee } from "../slices/employees";
 
 const EmployeesPage = () => {

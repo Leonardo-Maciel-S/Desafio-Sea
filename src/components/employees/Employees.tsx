@@ -8,6 +8,7 @@ import Switch from "../Switch";
 import type { RootState } from "../../store";
 import { completeFirstStage, nextStage } from "../../slices/stages";
 import { setIsNewEmployeeModalOpen } from "../../slices/employees";
+import { Link } from "react-router";
 
 const Employees = () => {
 	const { completedFirstStage } = useSelector(
@@ -102,14 +103,16 @@ const Employees = () => {
 			</div>
 
 			<div className="my-8 w-full flex justify-end">
-				<Button
-					isEnable={completedFirstStage}
-					bgFullDisable={!completedFirstStage}
-					bgFull
-					onClick={() => dispatch(nextStage())}
-				>
-					Próximo passo
-				</Button>
+				<Link to="/employees/2">
+					<Button
+						isEnable={completedFirstStage}
+						bgFullDisable={!completedFirstStage}
+						bgFull
+						onClick={() => dispatch(nextStage())}
+					>
+						Próximo passo
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);
