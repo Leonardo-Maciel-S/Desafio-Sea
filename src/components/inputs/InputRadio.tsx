@@ -5,7 +5,6 @@ const InputRadio = () => {
 	const [selected2, isSelected2] = useState(false);
 
 	const handleClick = (gender: string): void => {
-		console.log("teste");
 		if (gender === "female") {
 			isSelected(true);
 			isSelected2(false);

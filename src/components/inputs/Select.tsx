@@ -13,7 +13,6 @@ const Select = ({ defaultValue, options }: Select) => {
 	const option = defaultOption.current || defaultValue;
 
 	const handleClick = (option: string) => {
-		console.log(option);
 		setIsOptionModalOpen(false);
 		defaultOption.current = option;
 	};
@@ -40,7 +39,7 @@ const Select = ({ defaultValue, options }: Select) => {
 			<button
 				type="button"
 				onClick={() => setIsOptionModalOpen(!isOptionModalOpen)}
-				className="select w-full px-[12px] py-1 outline-none border border-defaultBlue rounded-[10px] text-base font-medium text-dark placeholder:text-dark flex justify-between items-center h-8"
+				className="select w-full px-[12px] py-1 outline-none border border-defaultBlue rounded-[10px] text-base font-medium text-dark placeholder:text-dark flex justify-between items-center gap-2 h-8 min-w-max"
 			>
 				<span>{option}</span>
 				<div className="w-2 h-2 border-b-2 border-s-2 border-black -rotate-[45deg] mr-1 mb-1 " />

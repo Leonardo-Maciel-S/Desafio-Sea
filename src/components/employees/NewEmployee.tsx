@@ -43,15 +43,10 @@ const NewEmployee = () => {
 		}
 
 		const newList = listOfEpi.filter((item) => {
-			console.log(item !== position);
-
 			return item !== position;
 		});
-		console.log(newList);
 
 		setListOfEpi([...newList]);
-
-		console.log(listOfEpi);
 	};
 
 	return (
@@ -104,7 +99,7 @@ const NewEmployee = () => {
 						</Label>
 
 						<Label name="RG" minWidth>
-							<Input type="text" placeholder="Nome" />
+							<Input type="text" placeholder="RG" />
 						</Label>
 
 						<Label name="Cargo" minWidth>
@@ -140,7 +135,7 @@ const NewEmployee = () => {
 											/>
 										</div>
 
-										<div className="flex gap-6 items-end">
+										<div className="flex gap-6 items-end flex-wrap ">
 											<Label name="Selecione o EPI:" className="">
 												<Select
 													defaultValue="Calçado de segurança"
@@ -148,7 +143,7 @@ const NewEmployee = () => {
 												/>
 											</Label>
 
-											<Label name="Informe o número do CA:" className="">
+											<Label name="Informe o número do CA:">
 												<Input type="text" placeholder="Digite o número" />
 											</Label>
 
@@ -181,7 +176,7 @@ const NewEmployee = () => {
 				</Fieldset>
 
 				{useEPI && (
-					<Fieldset className="flex-col gap-2">
+					<Fieldset className="flex-col gap-6">
 						<span className="text-sm font-medium">
 							Adicione Atestado de Saúde (opcional):
 						</span>
@@ -190,7 +185,7 @@ const NewEmployee = () => {
 					</Fieldset>
 				)}
 
-				<Button className="font-normal text-sm" isEnable>
+				<Button className="font-normal text-sm  my-4" isEnable>
 					Salvar
 				</Button>
 			</div>
