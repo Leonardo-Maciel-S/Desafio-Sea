@@ -15,7 +15,7 @@ const Label = ({
 	const min = minWidth && " xl:min-w-[45%]";
 	return (
 		<div
-			className={`flex flex-col gap-[8px] flex-1  h-16 ${className} ${min}`}
+			className={`flex flex-col gap-[8px] flex-1 h-16 ${className} ${min}`}
 			{...rest}
 		>
 			<span className="">{name}</span>

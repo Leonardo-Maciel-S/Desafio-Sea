@@ -16,7 +16,7 @@ const Switch = ({ on, off, active, ...rest }: SwitchProps) => {
 	const dispatch = useDispatch();
 
 	const enableSpan2 =
-		completedFirstStage || active ? "flex-row-reverse pr-2" : "flex-row pl-2";
+		completedFirstStage || active ? "flex-row-reverse pl-2" : "flex-row pr-2";
 
 	const text = completedFirstStage || active ? on : off;
 
@@ -27,12 +27,12 @@ const Switch = ({ on, off, active, ...rest }: SwitchProps) => {
 				className={`px-1 py-[2px] bg-stageDisabled  flex items-center gap-1 transition-all ease-linear rounded-full relative min-w-max ${enableSpan2}`}
 				{...rest}
 			>
-				<span className={`transition-all delay-0 font-thin text-xs`}>
-					{text}
-				</span>
 				<div
 					className={`size-4 bg-blueActive rounded-full transition-transform delay-0`}
 				/>
+				<span className={`transition-all delay-0 font-thin text-xs`}>
+					{text}
+				</span>
 			</button>
 		</div>
 	);
