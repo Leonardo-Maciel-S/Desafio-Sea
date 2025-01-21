@@ -3,9 +3,11 @@ import Fields from "./Fields";
 interface EmployeeCardProps {
 	active?: boolean;
 	name: string;
+	cpf: string;
+	job: string;
 }
 
-const EmployeeCard = ({ active, name }: EmployeeCardProps) => {
+const EmployeeCard = ({ active, name, cpf, job }: EmployeeCardProps) => {
 	const bgCard = active ? "bg-blueSky " : "bg-[#F2F2F2]";
 	return (
 		<div
@@ -14,9 +16,9 @@ const EmployeeCard = ({ active, name }: EmployeeCardProps) => {
 			<div className="flex flex-col gap-2 m-4">
 				<h2 className="text-2xl text-[#707070]">{name}</h2>
 				<div className="flex gap-5 ">
-					<Fields text="000.000.000-99" />
-					<Fields text="Ativo 00" />
-					<Fields text="Cargo 1" />
+					<Fields text={cpf} />
+					<Fields text={active ? "Ativo" : "Inativo"} />
+					<Fields text={job} />
 				</div>
 			</div>
 

@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import { getAllEmployee } from "../slices/employees";
 
 const EmployeesPage = () => {
-	const { isNewEmployeeModalOpen, listOfEmployees, errors, loading } =
-		useSelector((state: RootState) => state.employees);
+	const { isNewEmployeeModalOpen } = useSelector(
+		(state: RootState) => state.employees,
+	);
 
 	const dispatch: AppDispatch = useDispatch();
 

@@ -13,6 +13,11 @@ const Employees = () => {
 	const { completedFirstStage } = useSelector(
 		(state: RootState) => state.stages,
 	);
+
+	const { listOfEmployees } = useSelector(
+		(state: RootState) => state.employees,
+	);
+
 	const dispatch = useDispatch();
 
 	const [onlyActive, setOnlyActives] = useState(false);
@@ -59,10 +64,31 @@ const Employees = () => {
 				</div>
 
 				<div className="flex flex-col gap-4 py-6">
-					<EmployeeCard name="Daniel Alves da Silva" active />
-					<EmployeeCard name="Giselle Torres Lopes" />
-					<EmployeeCard name="Ana Bispo dos Santos" />
-					<EmployeeCard name="Regina Elisa Souza" active />
+					{listOfEmployees?.map((item) => {
+						if (onlyActive && onlyActive === item.active) {
+							return (
+								<EmployeeCard
+									active={item.active}
+									key={item.id}
+									name={item.name}
+									cpf={item.cpf}
+									job={item.job}
+								/>
+							);
+						}
+
+						if (!onlyActive) {
+							return (
+								<EmployeeCard
+									active={item.active}
+									key={item.id}
+									name={item.name}
+									cpf={item.cpf}
+									job={item.job}
+								/>
+							);
+						}
+					})}
 				</div>
 
 				<div className="w-full flex justify-end items-center gap-2 text-sm text-darkGray font-regular">

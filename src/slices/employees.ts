@@ -26,8 +26,7 @@ export interface Employee {
 
 interface Employees {
 	employeeToEdit: object;
-	listOfEmployees: object;
-	errors: null | string;
+	listOfEmployees: Employee[];
 	loading: boolean;
 	isNewEmployeeModalOpen: boolean;
 	isEditEmployeeModalOpen: boolean;
@@ -35,9 +34,8 @@ interface Employees {
 
 const initialState: Employees = {
 	employeeToEdit: {},
-	listOfEmployees: {},
+	listOfEmployees: [],
 	loading: false,
-	errors: null,
 	isEditEmployeeModalOpen: false,
 	isNewEmployeeModalOpen: false,
 };
@@ -48,9 +46,7 @@ export const getAllEmployee = createAsyncThunk(
 		try {
 			const response = await employeeService.getAllEmployee();
 			return response;
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	},
 );
 
@@ -78,14 +74,11 @@ const employeesSlice = createSlice({
 				state.loading = true;
 			})
 			.addCase(getAllEmployee.fulfilled, (state, action) => {
-				state.errors = null;
 				state.loading = false;
 				state.listOfEmployees = action.payload;
 			})
-			.addCase(getAllEmployee.rejected, (state, action) => {
-				state.errors = null;
+			.addCase(getAllEmployee.rejected, (state) => {
 				state.loading = false;
-				state.listOfEmployees = action.payload || "Erro Desconhecido";
 			});
 	},
 });
