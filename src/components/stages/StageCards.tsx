@@ -2,6 +2,8 @@ import { FaBuilding } from "react-icons/fa";
 
 import { tv } from "tailwind-variants";
 import type { ButtonHTMLAttributes } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const stageCards = tv({
 	base: "size-14 text-white flex justify-center items-center rounded-[20px] shadow-stagesCards",
@@ -35,12 +37,22 @@ const StageCards = ({
 	completedFirstStage,
 	...rest
 }: StageCardsProps) => {
+	const { isNewEmployeeModalOpen } = useSelector(
+		(state: RootState) => state.employees,
+	);
+
 	const backgroundCard =
-		stageCard === 1 || actualStage > 1 || completedFirstStage
+		stageCard === 1 ||
+		actualStage > 1 ||
+		completedFirstStage ||
+		isNewEmployeeModalOpen
 			? "default"
 			: "disabled";
 
-	const textStage = stageCard === 1 ? "text-defaultBlue" : "text-mediumGray";
+	const textStage =
+		stageCard === 1 || isNewEmployeeModalOpen
+			? "text-defaultBlue"
+			: "text-mediumGray";
 
 	const hasBorder = actualStage === stageCard;
 

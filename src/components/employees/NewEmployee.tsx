@@ -4,7 +4,7 @@ import type { RootState } from "../../store";
 import { setIsNewEmployeeModalOpen } from "../../slices/employees";
 
 // Pages
-import { nextStage } from "../../slices/stages";
+import { completeFirstStage, nextStage } from "../../slices/stages";
 
 // Components
 import Button from "../buttons/Button";
@@ -17,10 +17,15 @@ import Fieldset from "../inputs/Fieldset";
 import InputRadio from "../inputs/InputRadio";
 import arrowLeft from "../../assets/arrowLeft.svg";
 import InputFile from "../inputs/InputFile";
+import { Link } from "react-router";
 
 const NewEmployee = () => {
 	const { completedFirstStage } = useSelector(
 		(state: RootState) => state.stages,
+	);
+
+	const { isNewEmployeeModalOpen } = useSelector(
+		(state: RootState) => state.employees,
 	);
 
 	const dispatch = useDispatch();
@@ -191,14 +196,16 @@ const NewEmployee = () => {
 			</div>
 
 			<div className="my-8 w-full flex justify-end">
-				<Button
-					isEnable={completedFirstStage}
-					bgFullDisable={!completedFirstStage}
-					bgFull
-					onClick={() => dispatch(nextStage())}
-				>
-					Próximo passo
-				</Button>
+				<Link to="/employees/2">
+					<Button
+						isEnable={true}
+						bgFullDisable={false}
+						bgFull
+						onClick={() => dispatch(nextStage())}
+					>
+						Próximo passo
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);

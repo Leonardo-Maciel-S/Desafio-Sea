@@ -19,7 +19,10 @@ export const stagesSlice = createSlice({
 		nextStage: (state: Stages) => {
 			if (state.actualStage >= 1 && state.actualStage < 9) {
 				state.actualStage += 1;
-				return;
+			}
+
+			if (state.actualStage === 2) {
+				state.completedFirstStage = true;
 			}
 		},
 		previousStage: (state: Stages) => {

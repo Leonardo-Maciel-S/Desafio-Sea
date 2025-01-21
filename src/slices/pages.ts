@@ -5,7 +5,7 @@ export interface Pages {
 }
 
 const initialState: Pages = {
-	actualPage: "employees",
+	actualPage: "",
 };
 
 const pagesSlice = createSlice({
@@ -13,7 +13,31 @@ const pagesSlice = createSlice({
 	initialState,
 	reducers: {
 		selectPage: (state: Pages, action: PayloadAction<string>) => {
-			state.actualPage = action.payload;
+			console.log(action.payload);
+
+			if (action.payload.includes("home")) {
+				state.actualPage = "home";
+			}
+
+			if (action.payload.includes("employees") || action.payload === "/") {
+				state.actualPage = "employees";
+			}
+
+			if (action.payload.includes("network")) {
+				state.actualPage = "network";
+			}
+
+			if (action.payload.includes("notifications")) {
+				state.actualPage = "notifications";
+			}
+
+			if (action.payload.includes("reload")) {
+				state.actualPage = "reload";
+			}
+
+			if (action.payload.includes("user")) {
+				state.actualPage = "user";
+			}
 		},
 	},
 });
