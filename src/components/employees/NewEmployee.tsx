@@ -1,23 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-import type { RootState } from "../../store";
 import { setIsNewEmployeeModalOpen } from "../../slices/employees";
+import { Link } from "react-router";
 
 // Pages
-import { completeFirstStage, nextStage } from "../../slices/stages";
+import { nextStage } from "../../slices/stages";
 
 // Components
 import Button from "../buttons/Button";
 import Switch from "../Switch";
-import Label from "../inputs/Label";
-import Input from "../inputs/Input";
-import Select from "../inputs/Select";
 import CheckBox from "../inputs/CheckBox";
 import Fieldset from "../inputs/Fieldset";
-import InputRadio from "../inputs/InputRadio";
 import arrowLeft from "../../assets/arrowLeft.svg";
 import InputFile from "../inputs/InputFile";
-import { Link } from "react-router";
+import { PersonalDatas } from "./newEmployee/PersonalDatas";
+import { Activity } from "./newEmployee/Activity";
 
 const NewEmployee = () => {
 	const dispatch = useDispatch();
@@ -25,41 +22,8 @@ const NewEmployee = () => {
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
 
-	const [listOfActivity, setListOfActivity] = useState([1]);
-	const [listOfEpi, setListOfEpi] = useState([1]);
-
 	const handleChangeSelect = (value: string) => {
 		console.log(value);
-	};
-
-	const handleAddActivity = (method: string, position?: number) => {
-		if (method === "add") {
-			const lastIndex = listOfActivity.length - 1;
-			setListOfActivity([...listOfActivity, listOfActivity[lastIndex] + 1]);
-
-			return;
-		}
-
-		const newList = listOfActivity.filter((item) => {
-			return item !== position;
-		});
-
-		setListOfActivity([...newList]);
-	};
-
-	const handleAddEpi = (method: string, position?: number) => {
-		if (method === "add") {
-			const lastIndex = listOfEpi.length - 1;
-			setListOfEpi([...listOfEpi, listOfEpi[lastIndex] + 1]);
-
-			return;
-		}
-
-		const newList = listOfEpi.filter((item) => {
-			return item !== position;
-		});
-
-		setListOfEpi([...newList]);
 	};
 
 	return (
@@ -78,8 +42,8 @@ const NewEmployee = () => {
 				</button>
 				<h2 className="text-[28px] font-normal">Adicionar Funcionário</h2>
 			</header>
-			<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white rounded-b-[20px]">
-				<div className="flex flex-col justify-center gap-4 ">
+			<div className="flex flex-col justify-center px-6 pb-4 pt-8 gap-4 w-full border bg-white rounded-b-[20px]">
+				<div className="flex flex-col justify-center gap-4">
 					<Fieldset className="justify-between">
 						<span className="font-medium">
 							O trabalhador está ativo ou inativo?
@@ -92,36 +56,7 @@ const NewEmployee = () => {
 						/>
 					</Fieldset>
 
-					<Fieldset className="gap-[24px]">
-						<Label name="Nome" minWidth>
-							<Input type="text" placeholder="Nome" />
-						</Label>
-
-						<div className="flex flex-col flex-1 gap-[8px]">
-							<span className="font-medium text-base">Sexo</span>
-
-							<InputRadio />
-						</div>
-
-						<Label name="CPF" minWidth>
-							<Input type="text" placeholder="CPF" />
-						</Label>
-
-						<Label name="Data de Nascimento" minWidth>
-							<Input type="Date" />
-						</Label>
-
-						<Label name="RG" minWidth>
-							<Input type="text" placeholder="RG" />
-						</Label>
-
-						<Label name="Cargo" minWidth>
-							<Select
-								defaultValue="Frontend"
-								options={["Frontend", "Design", "Backend"]}
-							/>
-						</Label>
-					</Fieldset>
+					<PersonalDatas />
 				</div>
 
 				<Fieldset className="flex-col gap-4">
@@ -132,82 +67,8 @@ const NewEmployee = () => {
 						<CheckBox useEPI={useEPI} setUseEPI={setUseEPI} />
 						<span>O trabalhador não usa EPI.</span>
 					</div>
-					{useEPI && (
-						<div className="flex flex-col gap-6">
-							{listOfActivity.map((item, index) => {
-								return (
-									<Fieldset key={item} className="flex-col gap-6">
-										<div className="flex flex-col gap-2  ">
-											<span className="text-sm font-medium">
-												Selecione a atividade:
-											</span>
 
-											<Select
-												defaultValue="Atividade 1"
-												options={["Atividade 1", "Atividade 2", "Atividade 3"]}
-											/>
-										</div>
-
-										{listOfEpi.map((item) => (
-											<div
-												key={item}
-												className="flex gap-6 items-end flex-wrap justify-end"
-											>
-												<Label name="Selecione o EPI:" className="flex-1 ">
-													<Select
-														defaultValue="Calçado de segurança"
-														options={["Cinto", "Capacete"]}
-													/>
-												</Label>
-
-												<Label
-													name="Informe o número do CA:"
-													className="flex-1 "
-												>
-													<Input type="text" placeholder="Digite o número" />
-												</Label>
-
-												{item < listOfEpi.length ? (
-													<Button
-														className="font-normal flex-1 min-w-52 xl:max-w-52"
-														isEnable
-														onClick={() => handleAddEpi("delete", item)}
-													>
-														Excluir EPI
-													</Button>
-												) : (
-													<Button
-														className="font-normal flex-1 min-w-52 xl:max-w-52"
-														isEnable
-														onClick={() => handleAddEpi("add", item)}
-													>
-														Adicionar EPI
-													</Button>
-												)}
-											</div>
-										))}
-
-										{index < listOfActivity.length - 1 && (
-											<Button
-												onClick={() => handleAddActivity("delete", item)}
-												className="font-normal text-sm"
-												isEnable
-											>
-												Excluir Atividade
-											</Button>
-										)}
-									</Fieldset>
-								);
-							})}
-							<Button
-								onClick={() => handleAddActivity("add")}
-								className="font-normal text-sm"
-								isEnable
-							>
-								Adicionar outra atividade
-							</Button>
-						</div>
-					)}
+					{useEPI && <Activity />}
 				</Fieldset>
 
 				{useEPI && (

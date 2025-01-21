@@ -10,9 +10,10 @@ interface SideIcons {
 	name: string;
 	className?: string;
 	icon: IconType;
+	img?: string;
 }
 
-const SideIcons = ({ name, icon: Icon, className }: SideIcons) => {
+const SideIcons = ({ name, icon: Icon, className, img }: SideIcons) => {
 	const { actualPage } = useSelector((state: RootState) => state.pages);
 
 	const dispatch = useDispatch();
@@ -26,7 +27,6 @@ const SideIcons = ({ name, icon: Icon, className }: SideIcons) => {
 			<button
 				type="button"
 				className={`group flex items-center gap-2 ${className}`}
-				disabled={isSelected}
 				onClick={() => {
 					if (name !== "employees") {
 						dispatch(selectActualStage(1));
@@ -41,7 +41,7 @@ const SideIcons = ({ name, icon: Icon, className }: SideIcons) => {
 				<div
 					className={`flex items-center justify-center size-8 rounded-[10px] text-defaultBlue cursor-pointer ${opacityBackground} bg-white hover:opacity-100`}
 				>
-					<Icon className="text-xl" />
+					{img ? <img src={img} alt="" /> : <Icon className="text-xl" />}
 				</div>
 			</button>
 		</Link>

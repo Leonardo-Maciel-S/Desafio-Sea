@@ -22,7 +22,7 @@ const InputRadio = () => {
 				className="flex items-center justify-center gap-2 "
 			>
 				<div
-					className={`${selected && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-150 linear`}
+					className={`${selected && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
 				/>
 				<span>Feminino</span>
 
@@ -40,7 +40,7 @@ const InputRadio = () => {
 				className="flex items-center justify-center gap-2 "
 			>
 				<div
-					className={`${selected2 && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-150 linear`}
+					className={`${selected2 && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
 				/>
 				<span>Masculino</span>
 				<input

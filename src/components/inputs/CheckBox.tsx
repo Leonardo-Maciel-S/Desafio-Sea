@@ -7,16 +7,21 @@ interface CheckBoxProps {
 
 const CheckBox = ({ useEPI, setUseEPI }: CheckBoxProps) => {
 	return (
-		<div className="flex items-center">
+		<label htmlFor="epi" className="flex items-center">
 			<button
 				type="button"
-				onClick={() => setUseEPI(!useEPI)}
 				className="size-3 border-defaultBlue border flex justify-center items-center"
+				onClick={() => setUseEPI(!useEPI)}
 			>
 				{!useEPI && <FaCheck size={10} color="#4fa1c2" />}
 			</button>
-			<input type="checkbox" className="hidden" checked={!useEPI} />
-		</div>
+			<input
+				name="epi"
+				type="checkbox"
+				className="hidden"
+				defaultChecked={!useEPI}
+			/>
+		</label>
 	);
 };
 

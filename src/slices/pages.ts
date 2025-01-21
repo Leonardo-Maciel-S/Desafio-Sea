@@ -13,8 +13,6 @@ const pagesSlice = createSlice({
 	initialState,
 	reducers: {
 		selectPage: (state: Pages, action: PayloadAction<string>) => {
-			console.log(action.payload);
-
 			if (action.payload.includes("home")) {
 				state.actualPage = "home";
 			}

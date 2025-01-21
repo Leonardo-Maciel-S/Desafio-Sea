@@ -8,11 +8,13 @@ import {
 	FaRegFileAlt,
 	FaNetworkWired,
 	FaUser,
-	FaUndo,
 } from "react-icons/fa";
 import { selectPage } from "../../slices/pages";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { GiBackwardTime } from "react-icons/gi";
+
+import reload from "../../assets/reload.svg";
 
 const NavBar = () => {
 	const location = useLocation();
@@ -36,7 +38,7 @@ const NavBar = () => {
 						<FaRegFileAlt className="text-defaultBlue text-xs " />
 					</div>
 				</div>
-				<SideIcons name="reload" icon={FaUndo} />
+				<SideIcons name="reload" icon={GiBackwardTime} img={reload} />
 				<SideIcons name="user" icon={FaUser} />
 			</div>
 		</nav>
