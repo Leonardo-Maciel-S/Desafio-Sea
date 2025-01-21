@@ -2,13 +2,20 @@ import Employees from "../components/employees/Employees";
 import Profile from "../components/profile/Profile";
 import StagesModal from "../components/stages/StagesModal";
 import NewEmployee from "../components/employees/NewEmployee";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store";
+import { useEffect } from "react";
+import { getAllEmployee } from "../slices/employees";
 
 const EmployeesPage = () => {
-	const { isNewEmployeeModalOpen } = useSelector(
-		(state: RootState) => state.employees,
-	);
+	const { isNewEmployeeModalOpen, listOfEmployees, errors, loading } =
+		useSelector((state: RootState) => state.employees);
+
+	const dispatch: AppDispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getAllEmployee());
+	}, []);
 
 	return (
 		<div className="flex flex-col h-screen pt-5 gap-8 flex-1 ">
