@@ -9,7 +9,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
-				<main className="relative z-10 xl:pr-10 w-screen overflow-hidden ">
+				<main className="relative z-10 xl:pr-10 w-screen min-h-screen overflow-hidden ">
 					<NavBar />
 					<div className="pl-24 h-max flex flex-col">
 						<Routes>

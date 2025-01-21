@@ -9,12 +9,14 @@ export default {
 				stageDisabled: "#DBDBDB",
 				blueSky: "#E0ECF2",
 				mediumGray: "#959595",
+				blueActive: "#649FBF",
 			},
 
 			textColor: {
 				defaultBlue: "#4fa1c2",
 				mediumGray: "#959595",
 				darkGray: "#3A3A3A",
+				dark: "#272F33",
 			},
 
 			width: {
@@ -27,6 +29,7 @@ export default {
 			borderColor: {
 				defaultBlue: "#4fa1c2",
 				mediumGray: "#959595",
+				bgRadio: "#649FBF",
 			},
 
 			boxShadow: {

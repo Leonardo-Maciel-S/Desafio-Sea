@@ -6,7 +6,8 @@ import EmployeeCard from "../employeeCard/EmployeeCard";
 
 import Switch from "../Switch";
 import type { RootState } from "../../store";
-import { nextStage } from "../../slices/stages";
+import { completeFirstStage, nextStage } from "../../slices/stages";
+import { setIsNewEmployeeModalOpen } from "../../slices/employees";
 
 const Employees = () => {
 	const { completedFirstStage } = useSelector(
@@ -32,7 +33,13 @@ const Employees = () => {
 			</header>
 			<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white rounded-b-[20px]">
 				<div className="flex flex-col justify-center gap-4 ">
-					<Button isEnable textSize="base16">
+					<Button
+						isEnable
+						textSize="base16"
+						onClick={() => {
+							dispatch(setIsNewEmployeeModalOpen(true));
+						}}
+					>
 						+ Adicionar Funcionário
 					</Button>
 					<div className="flex justify-between">
@@ -60,7 +67,11 @@ const Employees = () => {
 
 				<div className="w-full flex justify-end items-center gap-2 text-sm text-darkGray font-regular">
 					<span>A etapa está concluída?</span>
-					<Switch on="Sim" off="Não" />
+					<Switch
+						onClick={() => dispatch(completeFirstStage())}
+						on="Sim"
+						off="Não"
+					/>
 				</div>
 			</div>
 
