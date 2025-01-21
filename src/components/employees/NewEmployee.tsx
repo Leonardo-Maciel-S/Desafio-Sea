@@ -1,17 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../buttons/Button";
-import Switch from "../Switch";
+import { useState } from "react";
 import type { RootState } from "../../store";
+import { setIsNewEmployeeModalOpen } from "../../slices/employees";
+
+// Pages
 import { nextStage } from "../../slices/stages";
 
-import arrowLeft from "../../assets/arrowLeft.svg";
-import Fieldset from "../inputs/fieldset";
-import { useState } from "react";
-import Input from "../inputs/Input";
+// Components
+import Button from "../buttons/Button";
+import Switch from "../Switch";
 import Label from "../inputs/Label";
-import { setIsNewEmployeeModalOpen } from "../../slices/employees";
-import InputRadio from "../inputs/InputRadio";
+import Input from "../inputs/Input";
 import Select from "../inputs/Select";
+import CheckBox from "../inputs/CheckBox";
+import Fieldset from "../inputs/Fieldset";
+import InputRadio from "../inputs/InputRadio";
+import arrowLeft from "../../assets/arrowLeft.svg";
+import InputFile from "../inputs/InputFile";
 
 const NewEmployee = () => {
 	const { completedFirstStage } = useSelector(
@@ -21,9 +26,32 @@ const NewEmployee = () => {
 	const dispatch = useDispatch();
 
 	const [isActive, setIsActive] = useState(true);
+	const [useEPI, setUseEPI] = useState(true);
+
+	const [listOfEpi, setListOfEpi] = useState([1]);
 
 	const handleChangeSelect = (value: string) => {
 		console.log(value);
+	};
+
+	const handleAddEPi = (method: string, position?: number) => {
+		if (method === "add") {
+			const lastIndex = listOfEpi.length - 1;
+			setListOfEpi([...listOfEpi, listOfEpi[lastIndex] + 1]);
+
+			return;
+		}
+
+		const newList = listOfEpi.filter((item) => {
+			console.log(item !== position);
+
+			return item !== position;
+		});
+		console.log(newList);
+
+		setListOfEpi([...newList]);
+
+		console.log(listOfEpi);
 	};
 
 	return (
@@ -45,7 +73,9 @@ const NewEmployee = () => {
 			<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white rounded-b-[20px]">
 				<div className="flex flex-col justify-center gap-4 ">
 					<Fieldset className="justify-between">
-						<span>O trabalhador está ativo ou inativo?</span>
+						<span className="font-medium">
+							O trabalhador está ativo ou inativo?
+						</span>
 						<Switch
 							onClick={() => setIsActive(!isActive)}
 							active={isActive}
@@ -55,7 +85,7 @@ const NewEmployee = () => {
 					</Fieldset>
 
 					<Fieldset className="gap-[24px]">
-						<Label name="Nome">
+						<Label name="Nome" minWidth>
 							<Input type="text" placeholder="Nome" />
 						</Label>
 
@@ -65,19 +95,19 @@ const NewEmployee = () => {
 							<InputRadio />
 						</div>
 
-						<Label name="CPF">
+						<Label name="CPF" minWidth>
 							<Input type="text" placeholder="CPF" />
 						</Label>
 
-						<Label name="Data de Nascimento">
+						<Label name="Data de Nascimento" minWidth>
 							<Input type="Date" />
 						</Label>
 
-						<Label name="RG">
+						<Label name="RG" minWidth>
 							<Input type="text" placeholder="Nome" />
 						</Label>
 
-						<Label name="Cargo">
+						<Label name="Cargo" minWidth>
 							<Select
 								defaultValue="Frontend"
 								options={["Frontend", "Design", "Backend"]}
@@ -86,16 +116,94 @@ const NewEmployee = () => {
 					</Fieldset>
 				</div>
 
-				<div className="my-8 w-full flex justify-end">
-					<Button
-						isEnable={completedFirstStage}
-						bgFullDisable={!completedFirstStage}
-						bgFull
-						onClick={() => dispatch(nextStage())}
-					>
-						Próximo passo
-					</Button>
-				</div>
+				<Fieldset className="flex-col gap-4">
+					<span className="font-medium">
+						Quais EPIs o trabalhador usa na atividade?
+					</span>
+					<div className="flex gap-2">
+						<CheckBox useEPI={useEPI} setUseEPI={setUseEPI} />
+						<span>O trabalhador não usa EPI.</span>
+					</div>
+					{useEPI && (
+						<div className="flex flex-col gap-6">
+							{listOfEpi.map((item, index) => {
+								return (
+									<Fieldset key={item} className="flex-col gap-6">
+										<div className="flex flex-col gap-2  ">
+											<span className="text-sm font-medium">
+												Selecione a atividade:
+											</span>
+
+											<Select
+												defaultValue="Atividade 1"
+												options={["Atividade 1", "Atividade 2", "Atividade 3"]}
+											/>
+										</div>
+
+										<div className="flex gap-6 items-end">
+											<Label name="Selecione o EPI:" className="">
+												<Select
+													defaultValue="Calçado de segurança"
+													options={["Cinto", "Capacete"]}
+												/>
+											</Label>
+
+											<Label name="Informe o número do CA:" className="">
+												<Input type="text" placeholder="Digite o número" />
+											</Label>
+
+											<Button className="font-normal" isEnable>
+												Adicionar EPI
+											</Button>
+										</div>
+
+										{index < listOfEpi.length - 1 && (
+											<Button
+												onClick={() => handleAddEPi("delete", item)}
+												className="font-normal text-sm"
+												isEnable
+											>
+												Excluir Atividade
+											</Button>
+										)}
+									</Fieldset>
+								);
+							})}
+							<Button
+								onClick={() => handleAddEPi("add")}
+								className="font-normal text-sm"
+								isEnable
+							>
+								Adicionar outra atividade
+							</Button>
+						</div>
+					)}
+				</Fieldset>
+
+				{useEPI && (
+					<Fieldset className="flex-col gap-2">
+						<span className="text-sm font-medium">
+							Adicione Atestado de Saúde (opcional):
+						</span>
+
+						<InputFile />
+					</Fieldset>
+				)}
+
+				<Button className="font-normal text-sm" isEnable>
+					Salvar
+				</Button>
+			</div>
+
+			<div className="my-8 w-full flex justify-end">
+				<Button
+					isEnable={completedFirstStage}
+					bgFullDisable={!completedFirstStage}
+					bgFull
+					onClick={() => dispatch(nextStage())}
+				>
+					Próximo passo
+				</Button>
 			</div>
 		</div>
 	);

@@ -19,8 +19,3 @@ body {
 	font-family: "Ubuntu", serif;
 	font-style: normal;
 }
-
-input[type="radio"] {
-	border: 1px solid #4fa1c2;
-	background-color: red;
-}

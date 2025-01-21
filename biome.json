@@ -22,6 +22,9 @@
 			"recommended": true,
 			"style": {
 				"noUnusedTemplateLiteral": "off"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "off"
 			}
 		}
 	},
