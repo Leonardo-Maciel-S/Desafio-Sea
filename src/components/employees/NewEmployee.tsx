@@ -20,26 +20,34 @@ import InputFile from "../inputs/InputFile";
 import { Link } from "react-router";
 
 const NewEmployee = () => {
-	const { completedFirstStage } = useSelector(
-		(state: RootState) => state.stages,
-	);
-
-	const { isNewEmployeeModalOpen } = useSelector(
-		(state: RootState) => state.employees,
-	);
-
 	const dispatch = useDispatch();
 
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
 
+	const [listOfActivity, setListOfActivity] = useState([1]);
 	const [listOfEpi, setListOfEpi] = useState([1]);
 
 	const handleChangeSelect = (value: string) => {
 		console.log(value);
 	};
 
-	const handleAddEPi = (method: string, position?: number) => {
+	const handleAddActivity = (method: string, position?: number) => {
+		if (method === "add") {
+			const lastIndex = listOfActivity.length - 1;
+			setListOfActivity([...listOfActivity, listOfActivity[lastIndex] + 1]);
+
+			return;
+		}
+
+		const newList = listOfActivity.filter((item) => {
+			return item !== position;
+		});
+
+		setListOfActivity([...newList]);
+	};
+
+	const handleAddEpi = (method: string, position?: number) => {
 		if (method === "add") {
 			const lastIndex = listOfEpi.length - 1;
 			setListOfEpi([...listOfEpi, listOfEpi[lastIndex] + 1]);
@@ -126,7 +134,7 @@ const NewEmployee = () => {
 					</div>
 					{useEPI && (
 						<div className="flex flex-col gap-6">
-							{listOfEpi.map((item, index) => {
+							{listOfActivity.map((item, index) => {
 								return (
 									<Fieldset key={item} className="flex-col gap-6">
 										<div className="flex flex-col gap-2  ">
@@ -140,26 +148,48 @@ const NewEmployee = () => {
 											/>
 										</div>
 
-										<div className="flex gap-6 items-end flex-wrap ">
-											<Label name="Selecione o EPI:" className="">
-												<Select
-													defaultValue="Calçado de segurança"
-													options={["Cinto", "Capacete"]}
-												/>
-											</Label>
+										{listOfEpi.map((item) => (
+											<div
+												key={item}
+												className="flex gap-6 items-end flex-wrap justify-end"
+											>
+												<Label name="Selecione o EPI:" className="flex-1 ">
+													<Select
+														defaultValue="Calçado de segurança"
+														options={["Cinto", "Capacete"]}
+													/>
+												</Label>
 
-											<Label name="Informe o número do CA:">
-												<Input type="text" placeholder="Digite o número" />
-											</Label>
+												<Label
+													name="Informe o número do CA:"
+													className="flex-1 "
+												>
+													<Input type="text" placeholder="Digite o número" />
+												</Label>
 
-											<Button className="font-normal" isEnable>
-												Adicionar EPI
-											</Button>
-										</div>
+												{item < listOfEpi.length ? (
+													<Button
+														className="font-normal flex-1 min-w-52 xl:max-w-52"
+														isEnable
+														onClick={() => handleAddEpi("delete", item)}
+													>
+														Excluir EPI
+													</Button>
+												) : (
+													<Button
+														className="font-normal flex-1 min-w-52 xl:max-w-52"
+														isEnable
+														onClick={() => handleAddEpi("add", item)}
+													>
+														Adicionar EPI
+													</Button>
+												)}
+											</div>
+										))}
 
-										{index < listOfEpi.length - 1 && (
+										{index < listOfActivity.length - 1 && (
 											<Button
-												onClick={() => handleAddEPi("delete", item)}
+												onClick={() => handleAddActivity("delete", item)}
 												className="font-normal text-sm"
 												isEnable
 											>
@@ -170,7 +200,7 @@ const NewEmployee = () => {
 								);
 							})}
 							<Button
-								onClick={() => handleAddEPi("add")}
+								onClick={() => handleAddActivity("add")}
 								className="font-normal text-sm"
 								isEnable
 							>
