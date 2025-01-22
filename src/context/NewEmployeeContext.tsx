@@ -1,8 +1,8 @@
 import { createContext, type HtmlHTMLAttributes } from "react";
 import { useForm, type UseFormReturn } from "react-hook-form";
 import {
-	newEmployeeSchema,
 	type NewEmployeeSchema,
+	newEmployeeSchema,
 } from "../types/typesNewEmployee";
 import { zodResolver } from "@hookform/resolvers/zod";
 

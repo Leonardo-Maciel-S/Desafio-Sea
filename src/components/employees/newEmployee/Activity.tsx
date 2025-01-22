@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Button from "../../buttons/Button";
 import Fieldset from "../../inputs/Fieldset";
 import { Epis } from "./Epis";
@@ -6,6 +6,8 @@ import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
 export const Activity = ({ useEPI }: { useEPI: boolean }) => {
 	const [listOfActivity, setListOfActivity] = useState([0]);
+
+	const useEPIRef = useRef(useEPI);
 
 	const handleAddActivity = (method: string, position?: number) => {
 		if (method === "add") {
@@ -43,12 +45,12 @@ export const Activity = ({ useEPI }: { useEPI: boolean }) => {
 							</span>
 
 							<div
-								className={`input h-9 flex justify-between items-center ${errors.useEPI && "error"}`}
+								className={`input h-9 flex justify-between items-center ${errors.epi && "error"}`}
 							>
 								<select
-									{...register(`useEPI.${item}.activity.${item}.name`, {
+									{...register(`epi.activity.${item}.name`, {
 										required: {
-											value: true,
+											value: useEPIRef.current,
 											message: "required",
 										},
 									})}

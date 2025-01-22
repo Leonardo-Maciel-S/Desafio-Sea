@@ -23,7 +23,7 @@ const NewEmployee = () => {
 	const context = useContext(NewEmployeeContext);
 	if (!context) return;
 
-	const { handleSubmit } = context.formMethods;
+	const { register, handleSubmit } = context.formMethods;
 
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
@@ -34,7 +34,7 @@ const NewEmployee = () => {
 
 	const handleForm = handleSubmit((data) => {
 		if (!useEPI) {
-			data.useEPI = [];
+			data.epi.activity = [];
 		}
 
 		data.active = isActive;
@@ -84,6 +84,11 @@ const NewEmployee = () => {
 					</span>
 					<div className="flex gap-2">
 						<CheckBox useEPI={useEPI} setUseEPI={setUseEPI} />
+						<input
+							type="checkbox"
+							defaultChecked={!useEPI}
+							{...register("epi.use")}
+						/>
 						<span>O trabalhador não usa EPI.</span>
 					</div>
 

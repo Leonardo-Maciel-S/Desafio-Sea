@@ -15,12 +15,6 @@ const CheckBox = ({ useEPI, setUseEPI }: CheckBoxProps) => {
 			>
 				{!useEPI && <FaCheck size={10} color="#4fa1c2" />}
 			</button>
-			<input
-				name="epi"
-				type="checkbox"
-				className="hidden"
-				defaultChecked={!useEPI}
-			/>
 		</label>
 	);
 };

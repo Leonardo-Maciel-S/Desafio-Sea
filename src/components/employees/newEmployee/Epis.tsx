@@ -29,9 +29,6 @@ export const Epis = ({ useEPI }: { useEPI: boolean }) => {
 		formState: { errors },
 	} = context.formMethods;
 
-	const errorsEPI = { ...errors.useEPI };
-	console.log(errorsEPI);
-
 	const options = ["Cinto", "Capacete"];
 
 	return (
@@ -42,18 +39,15 @@ export const Epis = ({ useEPI }: { useEPI: boolean }) => {
 						<span className="text-sm font-medium">Selecione o EPI:</span>
 
 						<div
-							className={`input h-9 flex justify-between items-center ${errorsEPI[item] && "error"}`}
+							className={`input h-9 flex justify-between items-center ${errors.epi?.activity && "error"}`}
 						>
 							<select
-								{...register(
-									`useEPI.${item}.activity.${item}.epi.${item}.name`,
-									{
-										required: {
-											value: useEPI,
-											message: "required",
-										},
+								{...register(`epi.activity.${item}.epi.${item}.name`, {
+									required: {
+										value: true,
+										message: "required",
 									},
-								)}
+								})}
 								defaultValue={""}
 								className="bg-transparent w-full flex justify-between items-center gap-2 "
 							>
@@ -73,12 +67,9 @@ export const Epis = ({ useEPI }: { useEPI: boolean }) => {
 						<input
 							type="text"
 							placeholder="Digite o número"
-							className={`input py-2 ${errorsEPI[item] && "error"}`}
-							{...register(`useEPI.${item}.activity.${item}.epi.${item}.ca`, {
-								required: {
-									value: useEPI,
-									message: "required",
-								},
+							className={`input py-2 ${errors.epi?.activity && "error"}`}
+							{...register(`epi.activity.${item}.epi.${item}.ca`, {
+								required: true,
 							})}
 						/>
 					</Label>
