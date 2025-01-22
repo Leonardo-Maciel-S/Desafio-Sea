@@ -1,23 +1,29 @@
-import { useRef } from "react";
-import type { Register } from "../../../types/typesNewEmployee";
+import { useContext } from "react";
 
 import Fieldset from "../../inputs/Fieldset";
 import InputRadio from "../../inputs/InputRadio";
 import Label from "../../inputs/Label";
-import Select from "../../inputs/Select";
+import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
-interface PersonalDatasProps extends Register {}
+export const PersonalDatas = () => {
+	const context = useContext(NewEmployeeContext);
+	if (!context) return;
 
-export const PersonalDatas = ({ register, errors }: PersonalDatasProps) => {
+	const {
+		register,
+		formState: { errors },
+	} = context.formMethods;
+
 	console.log(errors);
-	const valueSelect = useRef("");
+
+	const options = ["Frontend", "Backend", "Designer"];
 
 	return (
 		<Fieldset className="gap-[24px]">
 			<Label name="Nome" minWidth>
 				<input
 					type="text"
-					placeholder="Nome"
+					placeholder="Digite seu nome"
 					className={`input ${errors.name && "error"}`}
 					{...register("name")}
 				/>
@@ -46,7 +52,7 @@ export const PersonalDatas = ({ register, errors }: PersonalDatasProps) => {
 				/>
 			</Label>
 
-			<Label name="RG" minWidth>
+			<Label name="RG" className="flex-1" minWidth>
 				<input
 					className={`input ${errors.RG && "error"}`}
 					{...register("RG")}
@@ -55,12 +61,25 @@ export const PersonalDatas = ({ register, errors }: PersonalDatasProps) => {
 				/>
 			</Label>
 
-			<Label name="Cargo" minWidth>
-				<Select
-					options={["Frontend", "Design", "Backend"]}
-					defaultValue="Frontend"
-				/>
-				<input type="text" className="hidden" value={valueSelect.current} />
+			<Label name="Cargo" minWidth className="xl:min-w-[250px] flex-1">
+				<div
+					className={`input h-9 flex justify-between items-center ${errors.job && "error"} xl:min-w-[250px]`}
+				>
+					<select
+						{...register("job")}
+						defaultValue={""}
+						className="bg-transparent w-full flex justify-between items-center gap-2 "
+					>
+						<option value="" disabled>
+							Selecione uma opção
+						</option>
+						{options.map((option) => (
+							<option key={option} value={option}>
+								{option}
+							</option>
+						))}
+					</select>
+				</div>
 			</Label>
 		</Fieldset>
 	);

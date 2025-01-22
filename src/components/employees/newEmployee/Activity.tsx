@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../buttons/Button";
 import Fieldset from "../../inputs/Fieldset";
-import Select from "../../inputs/Select";
 import { Epis } from "./Epis";
+import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
-export const Activity = () => {
-	const [listOfActivity, setListOfActivity] = useState([1]);
+export const Activity = ({ useEPI }: { useEPI: boolean }) => {
+	const [listOfActivity, setListOfActivity] = useState([0]);
 
 	const handleAddActivity = (method: string, position?: number) => {
 		if (method === "add") {
@@ -22,6 +22,16 @@ export const Activity = () => {
 		setListOfActivity([...newList]);
 	};
 
+	const context = useContext(NewEmployeeContext);
+	if (!context) return;
+
+	const {
+		register,
+		formState: { errors },
+	} = context.formMethods;
+
+	const options = ["Atividade 1", "Atividade 2", "Atividade 3"];
+
 	return (
 		<div className="flex flex-col gap-6">
 			{listOfActivity.map((item, index) => {
@@ -32,13 +42,32 @@ export const Activity = () => {
 								Selecione a atividade:
 							</span>
 
-							<Select
-								defaultValue="Atividade 1"
-								options={["Atividade 1", "Atividade 2", "Atividade 3"]}
-							/>
+							<div
+								className={`input h-9 flex justify-between items-center ${errors.useEPI && "error"}`}
+							>
+								<select
+									{...register(`useEPI.${item}.activity.${item}.name`, {
+										required: {
+											value: true,
+											message: "required",
+										},
+									})}
+									defaultValue={""}
+									className={`bg-transparent w-full flex justify-between items-center gap-2  `}
+								>
+									<option value="" disabled>
+										Selecione uma opção
+									</option>
+									{options.map((option) => (
+										<option key={option} value={option}>
+											{option}
+										</option>
+									))}
+								</select>
+							</div>
 						</div>
 
-						<Epis />
+						<Epis useEPI={useEPI} />
 
 						{index < listOfActivity.length - 1 && (
 							<Button

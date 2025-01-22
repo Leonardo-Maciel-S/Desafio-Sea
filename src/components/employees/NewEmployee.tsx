@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { setIsNewEmployeeModalOpen } from "../../slices/employees";
 import { Link } from "react-router";
 
@@ -13,35 +13,30 @@ import CheckBox from "../inputs/CheckBox";
 import Fieldset from "../inputs/Fieldset";
 import arrowLeft from "../../assets/arrowLeft.svg";
 import InputFile from "../inputs/InputFile";
-import { PersonalDatas } from "./newEmployee/PersonalDatas";
 import { Activity } from "./newEmployee/Activity";
-import { useForm } from "react-hook-form";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-	newEmployeeSchema,
-	type NewEmployeeSchema,
-} from "../../types/typesNewEmployee";
+import { NewEmployeeContext } from "../../context/NewEmployeeContext";
+import { PersonalDatas } from "./newEmployee/PersonalDatas";
 
 const NewEmployee = () => {
 	const dispatch = useDispatch();
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<NewEmployeeSchema>({
-		resolver: zodResolver(newEmployeeSchema),
-	});
+	const context = useContext(NewEmployeeContext);
+	if (!context) return;
+
+	const { handleSubmit } = context.formMethods;
 
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
 
-	const handleChangeSelect = (value: string) => {
-		console.log(value);
-	};
+	// const handleChangeSelect = (value: string) => {
+	// 	console.log(value);
+	// };
 
 	const handleForm = handleSubmit((data) => {
+		if (!useEPI) {
+			data.useEPI = [];
+		}
+
 		data.active = isActive;
 		console.log(data);
 	});
@@ -80,7 +75,7 @@ const NewEmployee = () => {
 						/>
 					</Fieldset>
 
-					<PersonalDatas register={register} errors={errors} />
+					<PersonalDatas />
 				</div>
 
 				<Fieldset className="flex-col gap-4">
@@ -92,7 +87,7 @@ const NewEmployee = () => {
 						<span>O trabalhador não usa EPI.</span>
 					</div>
 
-					{useEPI && <Activity />}
+					{useEPI && <Activity useEPI={useEPI} />}
 				</Fieldset>
 
 				{useEPI && (
@@ -105,8 +100,8 @@ const NewEmployee = () => {
 					</Fieldset>
 				)}
 
-				<Button className="font-normal text-sm  my-4" isEnable>
-					<input type="submit" value="Salvar" />
+				<Button type="submit" className="font-normal text-sm  my-4" isEnable>
+					Salvar
 				</Button>
 			</form>
 

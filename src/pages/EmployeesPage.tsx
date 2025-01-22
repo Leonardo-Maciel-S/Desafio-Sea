@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import type { AppDispatch, RootState } from "../store";
 
 import { getAllEmployee } from "../slices/employees";
+import NewEmployeeContextProvider from "../context/NewEmployeeContext";
+import type { NewEmployeeSchema } from "../types/typesNewEmployee";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const EmployeesPage = () => {
 	const { isNewEmployeeModalOpen } = useSelector(
@@ -27,7 +30,10 @@ const EmployeesPage = () => {
 				<Profile />
 
 				{!isNewEmployeeModalOpen && <Employees />}
-				{isNewEmployeeModalOpen && <NewEmployee />}
+
+				<NewEmployeeContextProvider>
+					{isNewEmployeeModalOpen && <NewEmployee />}
+				</NewEmployeeContextProvider>
 			</div>
 		</div>
 	);

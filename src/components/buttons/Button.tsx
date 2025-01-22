@@ -1,3 +1,4 @@
+import type { ButtonHTMLType } from "antd/es/button";
 import type { HTMLAttributes } from "react";
 import { tv } from "tailwind-variants";
 
@@ -35,9 +36,11 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	isEnable?: boolean;
 	bgFull?: boolean;
 	bgFullDisable?: boolean;
+	type?: ButtonHTMLType;
 }
 
 const Button = ({
+	type,
 	children,
 	textSize,
 	isEnable,
@@ -49,6 +52,7 @@ const Button = ({
 }: ButtonProps) => {
 	return (
 		<button
+			type={type || "button"}
 			className={button({
 				flex1,
 				textSize,
