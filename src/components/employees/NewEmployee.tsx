@@ -15,14 +15,24 @@ import arrowLeft from "../../assets/arrowLeft.svg";
 import InputFile from "../inputs/InputFile";
 import { PersonalDatas } from "./newEmployee/PersonalDatas";
 import { Activity } from "./newEmployee/Activity";
-
-// Types
 import { useForm } from "react-hook-form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+	newEmployeeSchema,
+	type NewEmployeeSchema,
+} from "../../types/typesNewEmployee";
 
 const NewEmployee = () => {
 	const dispatch = useDispatch();
 
-	const { register, control, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<NewEmployeeSchema>({
+		resolver: zodResolver(newEmployeeSchema),
+	});
 
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
@@ -31,8 +41,8 @@ const NewEmployee = () => {
 		console.log(value);
 	};
 
-	const handleNewEmployee = handleSubmit((data) => {
-		console.log("tes");
+	const handleForm = handleSubmit((data) => {
+		data.active = isActive;
 		console.log(data);
 	});
 
@@ -54,7 +64,7 @@ const NewEmployee = () => {
 			</header>
 
 			<form
-				onSubmit={handleNewEmployee}
+				onSubmit={handleForm}
 				className="flex flex-col justify-center px-6 pb-4 pt-8 gap-4 w-full border bg-white rounded-b-[20px]"
 			>
 				<div className="flex flex-col justify-center gap-4">
@@ -70,7 +80,7 @@ const NewEmployee = () => {
 						/>
 					</Fieldset>
 
-					<PersonalDatas />
+					<PersonalDatas register={register} errors={errors} />
 				</div>
 
 				<Fieldset className="flex-col gap-4">

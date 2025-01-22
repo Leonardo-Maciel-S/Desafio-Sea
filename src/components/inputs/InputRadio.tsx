@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { type HTMLAttributes, useState } from "react";
 
-const InputRadio = () => {
+interface InputRadioProps extends HTMLAttributes<HTMLInputElement> {}
+
+const InputRadio = ({ ...rest }: InputRadioProps) => {
 	const [selected, isSelected] = useState(false);
 	const [selected2, isSelected2] = useState(false);
 
@@ -26,12 +28,7 @@ const InputRadio = () => {
 				/>
 				<span>Feminino</span>
 
-				<input
-					type="radio"
-					name="gender"
-					checked={selected}
-					className="hidden"
-				/>
+				<input type="radio" {...rest} checked={selected} className="hidden" />
 			</button>
 
 			<button
@@ -43,12 +40,7 @@ const InputRadio = () => {
 					className={`${selected2 && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
 				/>
 				<span>Masculino</span>
-				<input
-					type="radio"
-					name="gender"
-					checked={selected2}
-					className="hidden"
-				/>
+				<input type="radio" {...rest} checked={selected2} className="hidden" />
 			</button>
 		</div>
 	);

@@ -19,3 +19,22 @@ body {
 	font-family: "Ubuntu", serif;
 	font-style: normal;
 }
+
+.input {
+	padding: 0.25rem 12px;
+	outline: none;
+	border: 1px solid #4fa1c2;
+	border-radius: 10px;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	font-weight: 500;
+	color: #272f33;
+}
+
+.input::placeholder {
+	color: #272f33;
+}
+
+.input.error {
+	border: 1px solid red;
+}

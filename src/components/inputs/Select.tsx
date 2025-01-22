@@ -8,14 +8,14 @@ interface Select extends HTMLAttributes<HTMLInputElement> {
 
 const Select = ({ defaultValue, options, className, ...rest }: Select) => {
 	const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
-	const defaultOption = useRef("");
 	const selectRef = useRef<HTMLDivElement>(null);
+	const valueSelect = useRef("");
 
-	const option = defaultOption.current || defaultValue;
+	const option = valueSelect.current || defaultValue;
 
 	const handleClick = (option: string) => {
 		setIsOptionModalOpen(false);
-		defaultOption.current = option;
+		valueSelect.current = option;
 	};
 
 	const handleClickOutside = (event: MouseEvent) => {
@@ -40,11 +40,11 @@ const Select = ({ defaultValue, options, className, ...rest }: Select) => {
 			<button
 				type="button"
 				onClick={() => setIsOptionModalOpen(!isOptionModalOpen)}
-				className={`select w-full px-[12px] py-1 outline-none border border-defaultBlue rounded-[10px] text-base font-medium text-dark placeholder:text-dark flex justify-between items-center gap-2 min-w-56 ${className}`}
+				className={`select input w-full flex justify-between items-center gap-2  ${className}`}
 			>
 				<span>{option}</span>
 				<div className="w-2 h-2 border-b-2 border-s-2 border-black -rotate-[45deg] mr-1 mb-1 " />
-				<input type="text" className="hidden" value={option} {...rest} />
+				<input type="text" className="" value={option} />
 			</button>
 
 			{isOptionModalOpen && (

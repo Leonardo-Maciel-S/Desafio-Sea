@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
-const newEmployeeSchema = z.object({
+export const newEmployeeSchema = z.object({
+	active: z.boolean().optional(),
 	name: z.string(),
 	cpf: z.string().min(11, { message: "CPF mínimo de 11 números" }),
 	RG: z.string().min(7, { message: "RG mínimo de 7 números" }),
 	gender: z.enum(["feminino", "masculino"]),
-	birth: z.date(),
+	birth: z.string(),
 	job: z.string(),
 	useEPI: z.array(
 		z
@@ -23,13 +23,7 @@ const newEmployeeSchema = z.object({
 
 export type NewEmployeeSchema = z.infer<typeof newEmployeeSchema>;
 
-export function useFormHook() {
-	const { register, handleSubmit } = useForm<NewEmployeeSchema>({
-		resolver: zodResolver(newEmployeeSchema),
-	});
-
-	return {
-		register,
-		handleSubmit,
-	};
+export interface Register {
+	register: UseFormRegister<NewEmployeeSchema>;
+	errors: FieldErrors<NewEmployeeSchema>;
 }
