@@ -16,8 +16,13 @@ import InputFile from "../inputs/InputFile";
 import { PersonalDatas } from "./newEmployee/PersonalDatas";
 import { Activity } from "./newEmployee/Activity";
 
+// Types
+import { useForm } from "react-hook-form";
+
 const NewEmployee = () => {
 	const dispatch = useDispatch();
+
+	const { register, control, handleSubmit } = useForm();
 
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
@@ -26,8 +31,13 @@ const NewEmployee = () => {
 		console.log(value);
 	};
 
+	const handleNewEmployee = handleSubmit((data) => {
+		console.log("tes");
+		console.log(data);
+	});
+
 	return (
-		<div className="rounded-default w-full overflow-hidden ">
+		<div className="rounded-default w-full overflow-hidden text-dark">
 			<header className="bg-default text-white px-5 py-2 flex items-center gap-4">
 				<button
 					type="button"
@@ -42,7 +52,11 @@ const NewEmployee = () => {
 				</button>
 				<h2 className="text-[28px] font-normal">Adicionar Funcionário</h2>
 			</header>
-			<div className="flex flex-col justify-center px-6 pb-4 pt-8 gap-4 w-full border bg-white rounded-b-[20px]">
+
+			<form
+				onSubmit={handleNewEmployee}
+				className="flex flex-col justify-center px-6 pb-4 pt-8 gap-4 w-full border bg-white rounded-b-[20px]"
+			>
 				<div className="flex flex-col justify-center gap-4">
 					<Fieldset className="justify-between">
 						<span className="font-medium">
@@ -82,9 +96,9 @@ const NewEmployee = () => {
 				)}
 
 				<Button className="font-normal text-sm  my-4" isEnable>
-					Salvar
+					<input type="submit" value="Salvar" />
 				</Button>
-			</div>
+			</form>
 
 			<div className="my-8 w-full flex justify-end">
 				<Link to="/employees/2">

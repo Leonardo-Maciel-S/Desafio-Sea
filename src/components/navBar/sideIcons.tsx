@@ -41,7 +41,11 @@ const SideIcons = ({ name, icon: Icon, className, img }: SideIcons) => {
 				<div
 					className={`flex items-center justify-center size-8 rounded-[10px] text-defaultBlue cursor-pointer ${opacityBackground} bg-white hover:opacity-100`}
 				>
-					{img ? <img src={img} alt="" /> : <Icon className="text-xl" />}
+					{img ? (
+						<img src={img} alt="" width={23} />
+					) : (
+						<Icon className="text-xl" />
+					)}
 				</div>
 			</button>
 		</Link>

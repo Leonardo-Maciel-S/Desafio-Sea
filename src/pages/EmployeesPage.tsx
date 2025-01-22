@@ -25,6 +25,7 @@ const EmployeesPage = () => {
 			<StagesModal />
 			<div className="flex items-start gap-10">
 				<Profile />
+
 				{!isNewEmployeeModalOpen && <Employees />}
 				{isNewEmployeeModalOpen && <NewEmployee />}
 			</div>

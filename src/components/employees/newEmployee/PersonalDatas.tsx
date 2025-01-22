@@ -1,3 +1,4 @@
+import type { UseFormRegister } from "react-hook-form";
 import Fieldset from "../../inputs/Fieldset";
 import Input from "../../inputs/Input";
 import InputRadio from "../../inputs/InputRadio";
@@ -31,8 +32,8 @@ export const PersonalDatas = () => {
 
 			<Label name="Cargo" minWidth>
 				<Select
-					defaultValue="Frontend"
 					options={["Frontend", "Design", "Backend"]}
+					defaultValue="Frontend"
 				/>
 			</Label>
 		</Fieldset>

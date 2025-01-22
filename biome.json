@@ -24,7 +24,8 @@
 				"noUnusedTemplateLiteral": "off"
 			},
 			"correctness": {
-				"useExhaustiveDependencies": "off"
+				"useExhaustiveDependencies": "off",
+				"noUnusedVariables": "warn"
 			}
 		}
 	},

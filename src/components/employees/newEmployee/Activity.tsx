@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useFormHook } from "../../../hooks/useFormHook";
 import Button from "../../buttons/Button";
 import Fieldset from "../../inputs/Fieldset";
 import Select from "../../inputs/Select";
 import { Epis } from "./Epis";
 
 export const Activity = () => {
+	const { register } = useFormHook();
+
 	const [listOfActivity, setListOfActivity] = useState([1]);
 
 	const handleAddActivity = (method: string, position?: number) => {
@@ -26,8 +29,8 @@ export const Activity = () => {
 		<div className="flex flex-col gap-6">
 			{listOfActivity.map((item, index) => {
 				return (
-					<Fieldset key={item} className="flex-col gap-6">
-						<div className="flex flex-col gap-2  ">
+					<Fieldset key={item} className="flex-col gap-6 ">
+						<div className="flex flex-col gap-2 ">
 							<span className="text-sm font-medium">
 								Selecione a atividade:
 							</span>
@@ -35,6 +38,7 @@ export const Activity = () => {
 							<Select
 								defaultValue="Atividade 1"
 								options={["Atividade 1", "Atividade 2", "Atividade 3"]}
+								{...register("gender")}
 							/>
 						</div>
 
