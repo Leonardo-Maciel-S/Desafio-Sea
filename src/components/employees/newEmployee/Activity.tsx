@@ -43,7 +43,7 @@ export const Activity = () => {
 							</span>
 
 							<div
-								className={`input h-9 flex justify-between items-center ${errors.activities && "error"}`}
+								className={`input h-9 flex justify-between items-center ${errors.activities?.[item]?.name && "error"}`}
 							>
 								<select
 									{...register(`activities.${item}.name`)}
@@ -62,7 +62,7 @@ export const Activity = () => {
 							</div>
 						</div>
 
-						<Epis />
+						<Epis activityNumber={item} />
 
 						{index < listOfActivity.length - 1 && (
 							<Button

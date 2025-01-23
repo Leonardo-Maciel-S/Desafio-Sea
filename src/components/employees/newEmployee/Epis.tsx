@@ -3,7 +3,7 @@ import Button from "../../buttons/Button";
 import Label from "../../inputs/Label";
 import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
-export const Epis = () => {
+export const Epis = ({ activityNumber }: { activityNumber: number }) => {
 	const [listOfEpi, setListOfEpi] = useState([0]);
 
 	const handleAddEpi = (method: string, position?: number) => {
@@ -15,6 +15,7 @@ export const Epis = () => {
 		}
 
 		const newList = listOfEpi.filter((item) => {
+			unregister(`activities.${activityNumber}`);
 			return item !== position;
 		});
 
@@ -26,6 +27,7 @@ export const Epis = () => {
 
 	const {
 		register,
+		unregister,
 		formState: { errors },
 	} = context.formMethods;
 
@@ -39,10 +41,13 @@ export const Epis = () => {
 						<span className="text-sm font-medium">Selecione o EPI:</span>
 
 						<div
-							className={`input h-9 flex justify-between items-center ${errors.activities && "error"}`}
+							className={`input h-9 flex justify-between items-center ${errors.activities?.[activityNumber]?.epi?.[item]?.name && "error"}`}
 						>
 							<select
-								{...register(`activities.${item}.epi.${item}.name`, {})}
+								{...register(
+									`activities.${activityNumber}.epi.${item}.name`,
+									{},
+								)}
 								defaultValue={""}
 								className="bg-transparent w-full flex justify-between items-center gap-2 "
 							>
@@ -62,8 +67,8 @@ export const Epis = () => {
 						<input
 							type="text"
 							placeholder="Digite o número"
-							className={`input py-2 ${errors.activities && "error"}`}
-							{...register(`activities.${item}.epi.${item}.ca`)}
+							className={`input py-2 ${errors.activities?.[activityNumber]?.epi?.[item]?.ca && "error"}`}
+							{...register(`activities.${activityNumber}.epi.${item}.ca`)}
 						/>
 					</Label>
 

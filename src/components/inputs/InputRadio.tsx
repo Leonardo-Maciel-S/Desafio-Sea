@@ -1,22 +1,16 @@
-import { type HTMLAttributes, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { NewEmployeeContext } from "../../context/NewEmployeeContext";
 
-interface InputRadioProps extends HTMLAttributes<HTMLInputElement> {
-	setInputGender: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const InputRadio = ({ setInputGender }: InputRadioProps) => {
+const InputRadio = () => {
 	const [selected, isSelected] = useState("");
 
 	const handleClick = (gender: string): void => {
 		if (gender === "female") {
 			isSelected("female");
-			setInputGender("feminino");
 			return;
 		}
 
 		isSelected("male");
-		setInputGender("masculino");
 	};
 
 	const context = useContext(NewEmployeeContext);
@@ -27,7 +21,9 @@ const InputRadio = ({ setInputGender }: InputRadioProps) => {
 	} = context.formMethods;
 
 	return (
-		<div className="flex gap-2 items-center h-8 ">
+		<div
+			className={`flex gap-2 items-center h-8 ${errors.gender && "border border-red-500 rounded-[10px] px-2"}`}
+		>
 			<button type="button" onClick={() => handleClick("female")} className="">
 				<label
 					htmlFor="female"
@@ -43,6 +39,7 @@ const InputRadio = ({ setInputGender }: InputRadioProps) => {
 						id="female"
 						{...register("gender")}
 						value="female"
+						className="hidden"
 					/>
 				</label>
 			</button>
@@ -56,7 +53,13 @@ const InputRadio = ({ setInputGender }: InputRadioProps) => {
 						className={`${selected === "male" && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
 					/>
 					<span>Masculino</span>
-					<input type="radio" id="male" {...register("gender")} value="male" />
+					<input
+						type="radio"
+						id="male"
+						{...register("gender")}
+						value="male"
+						className="hidden"
+					/>
 				</label>
 			</button>
 		</div>

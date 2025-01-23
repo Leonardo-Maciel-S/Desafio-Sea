@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import Fieldset from "../../inputs/Fieldset";
 import InputRadio from "../../inputs/InputRadio";
@@ -6,8 +6,6 @@ import Label from "../../inputs/Label";
 import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
 export const PersonalDatas = () => {
-	const [inputGender, setInputGender] = useState("");
-
 	const context = useContext(NewEmployeeContext);
 	if (!context) return;
 
@@ -31,12 +29,10 @@ export const PersonalDatas = () => {
 				/>
 			</Label>
 
-			<div
-				className={`flex flex-col flex-1 gap-[8px] ${errors.gender && "border-b-1 border-red-500"}`}
-			>
+			<div className={`flex flex-col flex-1 gap-[8px] `}>
 				<span className="font-medium text-base">Sexo</span>
 
-				<InputRadio setInputGender={setInputGender} />
+				<InputRadio />
 			</div>
 
 			<Label name="CPF" minWidth>

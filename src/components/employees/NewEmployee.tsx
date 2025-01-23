@@ -22,11 +22,13 @@ const NewEmployee = () => {
 
 	const context = useContext(NewEmployeeContext);
 	if (!context) return;
+
 	const {
 		register,
 		handleSubmit,
 		unregister,
 		reset,
+		watch,
 		formState: { errors },
 	} = context.formMethods;
 
@@ -42,12 +44,14 @@ const NewEmployee = () => {
 		console.log(data);
 	});
 
+	const activities = watch("activities");
+
 	useEffect(() => {
 		if (!useEPI) {
 			unregister("activities");
 			unregister("medicalCertificate");
 		}
-	}, [useEPI, handleSubmit]);
+	}, [useEPI, handleSubmit, activities]);
 
 	useEffect(() => {
 		reset();
