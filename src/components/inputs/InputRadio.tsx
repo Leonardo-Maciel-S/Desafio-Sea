@@ -1,19 +1,21 @@
 import { type HTMLAttributes, useState } from "react";
 
-interface InputRadioProps extends HTMLAttributes<HTMLInputElement> {}
+interface InputRadioProps extends HTMLAttributes<HTMLInputElement> {
+	setInputGender: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const InputRadio = ({ ...rest }: InputRadioProps) => {
-	const [selected, isSelected] = useState(false);
-	const [selected2, isSelected2] = useState(false);
+const InputRadio = ({ setInputGender }: InputRadioProps) => {
+	const [selected, isSelected] = useState("");
 
 	const handleClick = (gender: string): void => {
 		if (gender === "female") {
-			isSelected(true);
-			isSelected2(false);
+			isSelected("female");
+			setInputGender("feminino");
 			return;
 		}
-		isSelected(false);
-		isSelected2(true);
+
+		isSelected("male");
+		setInputGender("masculino");
 	};
 
 	return (
@@ -24,11 +26,9 @@ const InputRadio = ({ ...rest }: InputRadioProps) => {
 				className="flex items-center justify-center gap-2 "
 			>
 				<div
-					className={`${selected && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
+					className={`${selected === "female" && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
 				/>
 				<span>Feminino</span>
-
-				<input type="radio" {...rest} checked={selected} className="hidden" />
 			</button>
 
 			<button
@@ -37,10 +37,9 @@ const InputRadio = ({ ...rest }: InputRadioProps) => {
 				className="flex items-center justify-center gap-2 "
 			>
 				<div
-					className={`${selected2 && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
+					className={`${selected === "male" && "bg-default"} size-4 border border-bgRadio rounded-full transition-all delay-75 linear`}
 				/>
 				<span>Masculino</span>
-				<input type="radio" {...rest} checked={selected2} className="hidden" />
 			</button>
 		</div>
 	);

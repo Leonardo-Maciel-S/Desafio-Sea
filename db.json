@@ -9,11 +9,16 @@
 			"gender": "masculino",
 			"birth": "2000-10-14",
 			"job": "Frontend",
-			"useEPI": [
+			"useEPI": true,
+			"activities": [
 				{
-					"activity": "atividade 1",
-					"epi": "Calçado de segurança",
-					"ca": "9356"
+					"name": "atividade 1",
+					"epi": [
+						{
+							"name": "Calçado de segurança",
+							"ca": "9356"
+						}
+					]
 				}
 			],
 			"medicalCertificate": "documento.pdf"
@@ -27,11 +32,16 @@
 			"gender": "feminino",
 			"birth": "2002-06-10",
 			"job": "Frontend",
-			"useEPI": [
+			"useEPI": true,
+			"activities": [
 				{
-					"activity": "atividade 2",
-					"epi": "bota",
-					"ca": "9354"
+					"name": "atividade 2",
+					"epi": [
+						{
+							"name": "bota",
+							"ca": "9354"
+						}
+					]
 				}
 			],
 			"medicalCertificate": "documento.pdf"
@@ -45,11 +55,16 @@
 			"gender": "feminino",
 			"birth": "2002-03-05",
 			"job": "backend",
-			"useEPI": [
+			"useEPI": true,
+			"activities": [
 				{
-					"activity": "atividade 3",
-					"epi": "cinto",
-					"ca": "9356"
+					"name": "atividade 3",
+					"epi": [
+						{
+							"name": "cinto",
+							"ca": "9356"
+						}
+					]
 				}
 			],
 			"medicalCertificate": "documento.pdf"
@@ -63,13 +78,8 @@
 			"gender": "feminino",
 			"birth": "2002-08-08",
 			"job": "backend",
-			"useEPI": [
-				{
-					"activity": "atividade 1",
-					"epi": "cinto",
-					"ca": "9354"
-				}
-			],
+			"useEPI": false,
+			"activities": [],
 			"medicalCertificate": "documento.pdf"
 		}
 	]

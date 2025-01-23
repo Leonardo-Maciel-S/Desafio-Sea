@@ -3,7 +3,7 @@ import Button from "../../buttons/Button";
 import Label from "../../inputs/Label";
 import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
-export const Epis = ({ useEPI }: { useEPI: boolean }) => {
+export const Epis = () => {
 	const [listOfEpi, setListOfEpi] = useState([0]);
 
 	const handleAddEpi = (method: string, position?: number) => {
@@ -39,15 +39,10 @@ export const Epis = ({ useEPI }: { useEPI: boolean }) => {
 						<span className="text-sm font-medium">Selecione o EPI:</span>
 
 						<div
-							className={`input h-9 flex justify-between items-center ${errors.epi?.activity && "error"}`}
+							className={`input h-9 flex justify-between items-center ${errors.activities && "error"}`}
 						>
 							<select
-								{...register(`epi.activity.${item}.epi.${item}.name`, {
-									required: {
-										value: true,
-										message: "required",
-									},
-								})}
+								{...register(`activities.${item}.epi.${item}.name`, {})}
 								defaultValue={""}
 								className="bg-transparent w-full flex justify-between items-center gap-2 "
 							>
@@ -67,10 +62,8 @@ export const Epis = ({ useEPI }: { useEPI: boolean }) => {
 						<input
 							type="text"
 							placeholder="Digite o número"
-							className={`input py-2 ${errors.epi?.activity && "error"}`}
-							{...register(`epi.activity.${item}.epi.${item}.ca`, {
-								required: true,
-							})}
+							className={`input py-2 ${errors.activities && "error"}`}
+							{...register(`activities.${item}.epi.${item}.ca`)}
 						/>
 					</Label>
 

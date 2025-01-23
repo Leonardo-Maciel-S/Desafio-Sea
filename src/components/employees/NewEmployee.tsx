@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { setIsNewEmployeeModalOpen } from "../../slices/employees";
 import { Link } from "react-router";
 
@@ -22,24 +22,36 @@ const NewEmployee = () => {
 
 	const context = useContext(NewEmployeeContext);
 	if (!context) return;
-
-	const { register, handleSubmit } = context.formMethods;
+	const {
+		register,
+		handleSubmit,
+		unregister,
+		reset,
+		formState: { errors },
+	} = context.formMethods;
 
 	const [isActive, setIsActive] = useState(true);
 	const [useEPI, setUseEPI] = useState(true);
-
-	// const handleChangeSelect = (value: string) => {
-	// 	console.log(value);
-	// };
+	const [inputFileName, setInputFileName] = useState("");
 
 	const handleForm = handleSubmit((data) => {
 		if (!useEPI) {
-			data.epi.activity = [];
+			data.activities = [];
 		}
-
 		data.active = isActive;
 		console.log(data);
 	});
+
+	useEffect(() => {
+		if (!useEPI) {
+			unregister("activities");
+			unregister("medicalCertificate");
+		}
+	}, [useEPI, handleSubmit]);
+
+	useEffect(() => {
+		reset();
+	}, []);
 
 	return (
 		<div className="rounded-default w-full overflow-hidden text-dark">
@@ -84,15 +96,16 @@ const NewEmployee = () => {
 					</span>
 					<div className="flex gap-2">
 						<CheckBox useEPI={useEPI} setUseEPI={setUseEPI} />
+						<span>O trabalhador não usa EPI.</span>
 						<input
 							type="checkbox"
-							defaultChecked={!useEPI}
-							{...register("epi.use")}
+							className="hidden"
+							checked={useEPI}
+							{...register("useEPI")}
 						/>
-						<span>O trabalhador não usa EPI.</span>
 					</div>
 
-					{useEPI && <Activity useEPI={useEPI} />}
+					{useEPI && <Activity />}
 				</Fieldset>
 
 				{useEPI && (
@@ -101,7 +114,16 @@ const NewEmployee = () => {
 							Adicione Atestado de Saúde (opcional):
 						</span>
 
-						<InputFile />
+						<InputFile
+							error={errors.medicalCertificate}
+							inputFileName={inputFileName}
+							setInputFileName={setInputFileName}
+						/>
+						<input
+							type="text"
+							value={inputFileName}
+							{...register("medicalCertificate")}
+						/>
 					</Fieldset>
 				)}
 
