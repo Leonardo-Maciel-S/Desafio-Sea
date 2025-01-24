@@ -1,8 +1,15 @@
 import { useContext, useState } from "react";
 import { NewEmployeeContext } from "../../context/NewEmployeeContext";
+import { EditEmployeeContext } from "../../context/EditEmployeeContext";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
-const InputRadio = () => {
-	const [selected, isSelected] = useState("");
+const InputRadio = ({ isNew = false }: { isNew?: boolean }) => {
+	const { employeeToEdit } = useSelector((state: RootState) => state.employees);
+
+	const defaultValue = employeeToEdit?.gender || "";
+
+	const [selected, isSelected] = useState(defaultValue);
 
 	const handleClick = (gender: string): void => {
 		if (gender === "female") {
@@ -13,8 +20,11 @@ const InputRadio = () => {
 		isSelected("male");
 	};
 
-	const context = useContext(NewEmployeeContext);
+	const context = isNew
+		? useContext(NewEmployeeContext)
+		: useContext(EditEmployeeContext);
 	if (!context) return;
+
 	const {
 		register,
 		formState: { errors },
@@ -37,7 +47,9 @@ const InputRadio = () => {
 					<input
 						type="radio"
 						id="female"
-						{...register("gender")}
+						{...register("gender", {
+							value: employeeToEdit?.gender as "female" | "male",
+						})}
 						value="female"
 						className="hidden"
 					/>
@@ -56,7 +68,9 @@ const InputRadio = () => {
 					<input
 						type="radio"
 						id="male"
-						{...register("gender")}
+						{...register("gender", {
+							value: employeeToEdit?.gender as "female" | "male",
+						})}
 						value="male"
 						className="hidden"
 					/>

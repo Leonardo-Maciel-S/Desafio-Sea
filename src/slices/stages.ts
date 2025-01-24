@@ -46,14 +46,7 @@ export const stagesSlice = createSlice({
 			}
 		},
 		completeFirstStage: (state: Stages) => {
-			if (state.completedFirstStage) {
-				state.completedFirstStage = false;
-				state.actualStage = 1;
-
-				return;
-			}
-
-			state.completedFirstStage = true;
+			state.completedFirstStage = !state.completedFirstStage;
 			state.actualStage = 1;
 		},
 	},

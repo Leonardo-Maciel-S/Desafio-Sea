@@ -31,6 +31,7 @@
   
 # Get started
 - Clone o repositório
+
 ```
 git clone https://github.com/Leonardo-Maciel-S/Desafio-Sea.git
 ```
@@ -45,5 +46,3 @@ npx json-server db.json
 - Em outra aba do terminal inicie o projeto
 ```
 npm run dev
-```
-

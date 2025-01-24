@@ -7,7 +7,17 @@ import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 export const Activity = () => {
 	const [listOfActivity, setListOfActivity] = useState([0]);
 
+	const context = useContext(NewEmployeeContext);
+	if (!context) return;
+	const {
+		register,
+		unregister,
+		formState: { errors },
+	} = context.formMethods;
+
 	const handleAddActivity = (method: string, position?: number) => {
+		unregister("activities");
+
 		if (method === "add") {
 			const lastIndex = listOfActivity.length - 1;
 			setListOfActivity([...listOfActivity, listOfActivity[lastIndex] + 1]);
@@ -15,20 +25,12 @@ export const Activity = () => {
 			return;
 		}
 
-		const newList = listOfActivity.filter((item) => {
-			return item !== position;
+		const newList = listOfActivity.filter((item, index) => {
+			return index !== position;
 		});
 
 		setListOfActivity([...newList]);
 	};
-
-	const context = useContext(NewEmployeeContext);
-	if (!context) return;
-
-	const {
-		register,
-		formState: { errors },
-	} = context.formMethods;
 
 	const options = ["Atividade 1", "Atividade 2", "Atividade 3"];
 
@@ -43,10 +45,10 @@ export const Activity = () => {
 							</span>
 
 							<div
-								className={`input h-9 flex justify-between items-center ${errors.activities?.[item]?.name && "error"}`}
+								className={`input h-9 flex justify-between items-center ${errors.activities?.[index]?.name && "error"}`}
 							>
 								<select
-									{...register(`activities.${item}.name`)}
+									{...register(`activities.${index}.name`)}
 									defaultValue={""}
 									className={`bg-transparent w-full flex justify-between items-center gap-2  `}
 								>
@@ -62,11 +64,11 @@ export const Activity = () => {
 							</div>
 						</div>
 
-						<Epis activityNumber={item} />
+						<Epis activityNumber={index} />
 
 						{index < listOfActivity.length - 1 && (
 							<Button
-								onClick={() => handleAddActivity("delete", item)}
+								onClick={() => handleAddActivity("delete", index)}
 								className="font-normal text-sm"
 								isEnable
 							>

@@ -4,6 +4,7 @@ import { tv } from "tailwind-variants";
 import type { ButtonHTMLAttributes } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import { Link } from "react-router";
 
 const stageCards = tv({
 	base: "size-14 text-white flex justify-center items-center rounded-[20px] shadow-stagesCards",
@@ -37,7 +38,7 @@ const StageCards = ({
 	completedFirstStage,
 	...rest
 }: StageCardsProps) => {
-	const { isNewEmployeeModalOpen } = useSelector(
+	const { isNewEmployeeModalOpen, isEditEmployeeModalOpen } = useSelector(
 		(state: RootState) => state.employees,
 	);
 
@@ -45,12 +46,13 @@ const StageCards = ({
 		stageCard === 1 ||
 		actualStage > 1 ||
 		completedFirstStage ||
-		isNewEmployeeModalOpen
+		isNewEmployeeModalOpen ||
+		isEditEmployeeModalOpen
 			? "default"
 			: "disabled";
 
 	const textStage =
-		stageCard === 1 || isNewEmployeeModalOpen
+		stageCard === 1 || isNewEmployeeModalOpen || isEditEmployeeModalOpen
 			? "text-defaultBlue"
 			: "text-mediumGray";
 
@@ -58,17 +60,38 @@ const StageCards = ({
 
 	return (
 		<div className="flex flex-col items-center gap-2 h-[130px] ">
-			<button
-				type="button"
-				className={stageCards({
-					active: backgroundCard,
-					isActualStage: hasBorder,
-				})}
-				disabled={!completedFirstStage || actualStage === stageCard}
-				{...rest}
-			>
-				<FaBuilding className="text-2xl" />
-			</button>
+			<Link to={`/employees/${stageCard}`}>
+				{isNewEmployeeModalOpen || isEditEmployeeModalOpen ? (
+					<button
+						type="button"
+						className={stageCards({
+							active: backgroundCard,
+							isActualStage: hasBorder,
+						})}
+						disabled={actualStage === stageCard}
+						{...rest}
+					>
+						<FaBuilding className="text-2xl" />
+					</button>
+				) : (
+					<button
+						type="button"
+						className={stageCards({
+							active: backgroundCard,
+							isActualStage: hasBorder,
+						})}
+						disabled={
+							actualStage === stageCard ||
+							isNewEmployeeModalOpen ||
+							isEditEmployeeModalOpen ||
+							!completedFirstStage
+						}
+						{...rest}
+					>
+						<FaBuilding className="text-2xl" />
+					</button>
+				)}
+			</Link>
 
 			<div className="flex flex-col items-center text-center font-medium text-xs">
 				<span className={textStage}>item {stageCard}</span>

@@ -1,7 +1,7 @@
 import { FaCheck } from "react-icons/fa";
 
 interface CheckBoxProps {
-	useEPI: boolean;
+	useEPI?: boolean;
 	setUseEPI: (value: boolean) => void;
 }
 

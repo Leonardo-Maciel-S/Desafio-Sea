@@ -1,86 +1,107 @@
 {
-	"employee": [
-		{
-			"id": "1",
-			"active": true,
-			"name": "Daniel Alves da Silva",
-			"cpf": "000.000.000-99",
-			"RG": "000001",
-			"gender": "masculino",
-			"birth": "2000-10-14",
-			"job": "Frontend",
-			"useEPI": true,
-			"activities": [
-				{
-					"name": "atividade 1",
-					"epi": [
-						{
-							"name": "Calçado de segurança",
-							"ca": "9356"
-						}
-					]
-				}
-			],
-			"medicalCertificate": "documento.pdf"
-		},
-		{
-			"id": "2",
-			"active": false,
-			"name": "Giselle Torres Lopes",
-			"cpf": "000.000.000-88",
-			"RG": "000001",
-			"gender": "feminino",
-			"birth": "2002-06-10",
-			"job": "Frontend",
-			"useEPI": true,
-			"activities": [
-				{
-					"name": "atividade 2",
-					"epi": [
-						{
-							"name": "bota",
-							"ca": "9354"
-						}
-					]
-				}
-			],
-			"medicalCertificate": "documento.pdf"
-		},
-		{
-			"id": "3",
-			"active": false,
-			"name": "Ana Bispo dos Santos",
-			"cpf": "000.000.000-77",
-			"RG": "000001",
-			"gender": "feminino",
-			"birth": "2002-03-05",
-			"job": "backend",
-			"useEPI": true,
-			"activities": [
-				{
-					"name": "atividade 3",
-					"epi": [
-						{
-							"name": "cinto",
-							"ca": "9356"
-						}
-					]
-				}
-			],
-			"medicalCertificate": "documento.pdf"
-		},
-		{
-			"id": "4",
-			"active": true,
-			"name": "Regina Elisa Souza",
-			"cpf": "000.000.000-66",
-			"RG": "000001",
-			"gender": "feminino",
-			"birth": "2002-08-08",
-			"job": "backend",
-			"useEPI": false,
-			"activities": [],
-			"medicalCertificate": "documento.pdf"
-		}
-	]
+  "employee": [
+    {
+      "name": "Daniel Alves da Silva",
+      "cpf": "000.000.000-99",
+      "RG": "0578643",
+      "gender": "male",
+      "birth": "2002-06-10",
+      "job": "Frontend",
+      "useEPI": true,
+      "activities": [
+        {
+          "name": "atividade 2",
+          "epi": [
+            {
+              "name": "bota",
+              "ca": "9354"
+            }
+          ]
+        }
+      ],
+      "medicalCertificate": "1644843733748.pdf",
+      "id": "bf75",
+      "active": true
+    },
+    {
+      "name": "Giselle Torres Lopes",
+      "cpf": "000.000.000-88",
+      "RG": "0489632",
+      "gender": "female",
+      "birth": "2002-06-10",
+      "job": "Frontend",
+      "useEPI": true,
+      "activities": [
+        {
+          "name": "atividade 2",
+          "epi": [
+            {
+              "name": "bota",
+              "ca": "9354"
+            }
+          ]
+        }
+      ],
+      "medicalCertificate": "documento.pdf",
+      "id": "bf89",
+      "active": false
+    },
+    {
+      "name": "Ana Bispo dos Santos",
+      "cpf": "222.222.222-77",
+      "RG": "0156478",
+      "gender": "female",
+      "birth": "1998-11-22",
+      "job": "Frontend",
+      "useEPI": false,
+      "activities": [
+        {
+          "name": "atividade 1",
+          "epi": [
+            {
+              "name": "capacete",
+              "ca": "1234"
+            }
+          ]
+        }
+      ],
+      "id": "d34b",
+      "active": false
+    },
+    {
+      "name": "Regina Elisa Souza",
+      "cpf": "000.000.000-66",
+      "RG": "0446632",
+      "gender": "female",
+      "birth": "2002-08-08",
+      "job": "Frontend",
+      "useEPI": true,
+      "medicalCertificate": "Captura de tela de 2024-11-25 16-11-46.png",
+      "id": "53da",
+      "active": true
+    },
+    {
+      "name": "admin",
+      "cpf": "000.000.000-99",
+      "RG": "0578643",
+      "gender": "male",
+      "birth": "2025-01-03",
+      "job": "Frontend",
+      "useEPI": true,
+      "activities": [
+        {
+          "name": "Atividade 1",
+          "epi": [
+            {
+              "name": "Cinto",
+              "ca": "1"
+            }
+          ]
+        }
+      ],
+      "medicalCertificate": "1644843733748.pdf",
+      "id": "2c08",
+      "active": false
+    }
+  ]
 }

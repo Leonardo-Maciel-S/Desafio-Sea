@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../store";
+import type { AppDispatch, RootState } from "../../store";
 import { Link } from "react-router";
 
 import Button from "../buttons/Button";
 import Switch from "../Switch";
-import Filters from "./Filters";
-import EmployeeCard from "./employeeCard/EmployeeCard";
+import EmployeeCard from "../employeeCard/EmployeeCard";
 import { completeFirstStage, nextStage } from "../../slices/stages";
+import FiltersEmployee from "./FiltersEmployee";
 
 const Employees = () => {
+	const [onlyActive, setOnlyActives] = useState(false);
+
 	const { completedFirstStage } = useSelector(
 		(state: RootState) => state.stages,
 	);
@@ -18,9 +20,7 @@ const Employees = () => {
 		(state: RootState) => state.employees,
 	);
 
-	const dispatch = useDispatch();
-
-	const [onlyActive, setOnlyActives] = useState(false);
+	const dispatch = useDispatch<AppDispatch>();
 
 	return (
 		<div className="rounded-default w-full overflow-hidden ">
@@ -29,7 +29,10 @@ const Employees = () => {
 			</header>
 
 			<div className="flex flex-col justify-center px-6 py-4 gap-4 w-full border bg-white rounded-b-[20px]">
-				<Filters onlyActive={onlyActive} setOnlyActives={setOnlyActives} />
+				<FiltersEmployee
+					onlyActive={onlyActive}
+					setOnlyActives={setOnlyActives}
+				/>
 
 				<div className="flex flex-col gap-4 py-6">
 					{listOfEmployees?.map((item) => {
@@ -38,6 +41,7 @@ const Employees = () => {
 								<EmployeeCard
 									active={item.active}
 									key={item.id}
+									itemId={item.id}
 									name={item.name}
 									cpf={item.cpf}
 									job={item.job}
@@ -50,6 +54,7 @@ const Employees = () => {
 								<EmployeeCard
 									active={item.active}
 									key={item.id}
+									itemId={item.id}
 									name={item.name}
 									cpf={item.cpf}
 									job={item.job}

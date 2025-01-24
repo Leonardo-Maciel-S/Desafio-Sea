@@ -9,31 +9,34 @@ import type { AppDispatch, RootState } from "../store";
 
 import { getAllEmployee } from "../slices/employees";
 import NewEmployeeContextProvider from "../context/NewEmployeeContext";
-import type { NewEmployeeSchema } from "../types/typesNewEmployee";
-import { zodResolver } from "@hookform/resolvers/zod";
+import EditEmployee from "../components/employees/EditEmployee";
+import EditEmployeeContextProvider from "../context/EditEmployeeContext";
 
 const EmployeesPage = () => {
-	const { isNewEmployeeModalOpen } = useSelector(
-		(state: RootState) => state.employees,
-	);
+	const { isNewEmployeeModalOpen, isEditEmployeeModalOpen, loading } =
+		useSelector((state: RootState) => state.employees);
 
-	const dispatch: AppDispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
 		dispatch(getAllEmployee());
 	}, []);
 
 	return (
-		<div className="flex flex-col h-screen pt-5 gap-8 flex-1 ">
+		<div className="flex flex-col h-screen pt-5 gap-8 flex-1  ">
 			<StagesModal />
-			<div className="flex items-start gap-10">
+			<div className="flex flex-col items-start gap-10 pr-10 xl:p-0 xl:flex-row ">
 				<Profile />
 
-				{!isNewEmployeeModalOpen && <Employees />}
+				{!isNewEmployeeModalOpen && !isEditEmployeeModalOpen && <Employees />}
 
 				<NewEmployeeContextProvider>
 					{isNewEmployeeModalOpen && <NewEmployee />}
 				</NewEmployeeContextProvider>
+
+				<EditEmployeeContextProvider>
+					{isEditEmployeeModalOpen && !loading && <EditEmployee />}
+				</EditEmployeeContextProvider>
 			</div>
 		</div>
 	);

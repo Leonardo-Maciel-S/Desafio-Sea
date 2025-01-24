@@ -3,15 +3,14 @@ import { useForm, type UseFormReturn } from "react-hook-form";
 import { type NewEmployeeSchema, newEmployeeSchema } from "../types/employees";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-interface NewEmployeeContextType {
+interface EditEmployeeContextType {
 	formMethods: UseFormReturn<NewEmployeeSchema>;
 }
 
-export const NewEmployeeContext = createContext<NewEmployeeContextType | null>(
-	null,
-);
+export const EditEmployeeContext =
+	createContext<EditEmployeeContextType | null>(null);
 
-const NewEmployeeContextProvider = ({
+const EditEmployeeContextProvider = ({
 	children,
 }: HtmlHTMLAttributes<HTMLElement>) => {
 	const formMethods = useForm<NewEmployeeSchema>({
@@ -19,10 +18,10 @@ const NewEmployeeContextProvider = ({
 	});
 
 	return (
-		<NewEmployeeContext.Provider value={{ formMethods }}>
+		<EditEmployeeContext.Provider value={{ formMethods }}>
 			{children}
-		</NewEmployeeContext.Provider>
+		</EditEmployeeContext.Provider>
 	);
 };
 
-export default NewEmployeeContextProvider;
+export default EditEmployeeContextProvider;

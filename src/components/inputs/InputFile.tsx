@@ -1,23 +1,46 @@
 import { FaPaperclip } from "react-icons/fa";
-import type { ChangeEvent } from "react";
+import { useContext, useEffect, useState, type ChangeEvent } from "react";
 import type { FieldError } from "react-hook-form";
+import { NewEmployeeContext } from "../../context/NewEmployeeContext";
+import { EditEmployeeContext } from "../../context/EditEmployeeContext";
+import type { Employee } from "../../types/employees";
 
 interface InputFileProps {
 	error?: FieldError;
-	inputFileName: string;
+	inputFileName?: string;
 	setInputFileName: React.Dispatch<React.SetStateAction<string>>;
+	employeeToEdit?: Employee | null;
+	isNew?: boolean;
 }
 
 const InputFile = ({
 	error,
-	inputFileName,
+	isNew,
 	setInputFileName,
+	inputFileName,
 }: InputFileProps) => {
 	const handleClick = (e: ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 
-		if (files) setInputFileName(files[0].name);
+		if (files) {
+			const name = files[0].name;
+
+			setValue("medicalCertificate", name);
+			setInputFileName(name);
+		}
 	};
+
+	const context = isNew
+		? useContext(NewEmployeeContext)
+		: useContext(EditEmployeeContext);
+
+	if (!context) return;
+
+	const { register, setValue } = context.formMethods;
+
+	useEffect(() => {
+		register("medicalCertificate");
+	}, [inputFileName]);
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -34,10 +57,15 @@ const InputFile = ({
 			>
 				<input
 					id="file"
-					name="file"
-					onChange={(e) => handleClick(e)}
 					type="file"
 					className="hidden"
+					onChange={(e) => handleClick(e)}
+				/>
+
+				<input
+					type="text"
+					className="hidden"
+					{...register("medicalCertificate", { value: inputFileName })}
 				/>
 
 				<span>Selecionar arquivo</span>

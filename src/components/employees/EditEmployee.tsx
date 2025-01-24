@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import {
-	addAnEmployee,
-	setIsNewEmployeeModalOpen,
+	putAnEmployee,
+	setIsEditEmployeeModalOpen,
 } from "../../slices/employees";
 import { Link } from "react-router";
 
@@ -15,17 +15,27 @@ import Switch from "../Switch";
 import CheckBox from "../inputs/CheckBox";
 import Fieldset from "../inputs/Fieldset";
 import arrowLeft from "../../assets/arrowLeft.svg";
-import InputFile from "../inputs/InputFile";
-import { Activity } from "./newEmployee/Activity";
-import { PersonalDatas } from "./newEmployee/PersonalDatas";
+import { PersonalDatas } from "./editEmployee/PersonalDatas";
 import type { UseFormData } from "../../types/employees";
-import type { AppDispatch } from "../../store";
-import { NewEmployeeContext } from "../../context/NewEmployeeContext";
+import type { AppDispatch, RootState } from "../../store";
+import { EditEmployeeContext } from "../../context/EditEmployeeContext";
+import { EditActivity } from "./editEmployee/EditActivity";
+import InputFile from "../inputs/InputFile";
 
-const NewEmployee = () => {
-	const dispatch = useDispatch<AppDispatch>();
+const EditEmployee = () => {
+	const { employeeToEdit, loading } = useSelector(
+		(state: RootState) => state.employees,
+	);
+	if (loading) return;
+	if (!employeeToEdit) return;
 
-	const context = useContext(NewEmployeeContext);
+	const [isActive, setIsActive] = useState(employeeToEdit?.active);
+	const [useEPI, setUseEPI] = useState(employeeToEdit?.useEPI);
+	const [inputFileName, setInputFileName] = useState(
+		employeeToEdit?.medicalCertificate,
+	);
+
+	const context = useContext(EditEmployeeContext);
 	if (!context) return;
 
 	const {
@@ -37,18 +47,26 @@ const NewEmployee = () => {
 		formState: { errors },
 	} = context.formMethods;
 
-	const [isActive, setIsActive] = useState(true);
-	const [useEPI, setUseEPI] = useState(true);
-	const [inputFileName, setInputFileName] = useState("");
+	const dispatch = useDispatch<AppDispatch>();
+	console.log(errors);
 
-	const handleForm = handleSubmit((data: UseFormData) => {
+	const handleFormSubmits = handleSubmit((data: UseFormData) => {
 		if (!useEPI) {
 			data.activities = [];
 		}
-		data.active = isActive;
-		data.useEPI = useEPI;
 
-		dispatch(addAnEmployee(data));
+		data.useEPI = false;
+
+		if (useEPI) {
+			data.useEPI = useEPI;
+		}
+
+		data.id = employeeToEdit?.id;
+		data.active = isActive;
+
+		console.log(data);
+
+		dispatch(putAnEmployee(data));
 	});
 
 	const activities = watch("activities");
@@ -69,7 +87,7 @@ const NewEmployee = () => {
 			<header className="bg-default text-white px-5 py-2 flex items-center gap-4">
 				<button
 					type="button"
-					onClick={() => dispatch(setIsNewEmployeeModalOpen(false))}
+					onClick={() => dispatch(setIsEditEmployeeModalOpen(false))}
 				>
 					<img
 						src={arrowLeft}
@@ -78,11 +96,11 @@ const NewEmployee = () => {
 						alt="seta para esquerda"
 					/>
 				</button>
-				<h2 className="text-[28px] font-normal">Adicionar Funcionário</h2>
+				<h2 className="text-[28px] font-normal">Editar Funcionário</h2>
 			</header>
 
 			<form
-				onSubmit={handleForm}
+				onSubmit={handleFormSubmits}
 				className="flex flex-col justify-center px-6 pb-4 pt-8 gap-4 w-full border bg-white rounded-b-[20px]"
 			>
 				<div className="flex flex-col justify-center gap-4">
@@ -111,12 +129,11 @@ const NewEmployee = () => {
 						<input
 							type="checkbox"
 							className="hidden"
-							checked={useEPI}
-							{...register("useEPI")}
+							{...register("useEPI", { value: employeeToEdit?.useEPI })}
 						/>
 					</div>
 
-					{useEPI && <Activity />}
+					{useEPI && <EditActivity />}
 				</Fieldset>
 
 				{useEPI && (
@@ -129,7 +146,6 @@ const NewEmployee = () => {
 							error={errors.medicalCertificate}
 							inputFileName={inputFileName}
 							setInputFileName={setInputFileName}
-							isNew
 						/>
 					</Fieldset>
 				)}
@@ -155,4 +171,4 @@ const NewEmployee = () => {
 	);
 };
 
-export default NewEmployee;
+export default EditEmployee;

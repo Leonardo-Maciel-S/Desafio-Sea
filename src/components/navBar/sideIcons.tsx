@@ -1,10 +1,11 @@
 import type { IconType } from "react-icons";
-import type { RootState } from "../../store";
+import type { AppDispatch, RootState } from "../../store";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectPage } from "../../slices/pages";
 import { Link } from "react-router";
-import { selectActualStage } from "../../slices/stages";
+import { completeFirstStage, selectActualStage } from "../../slices/stages";
+import { setIsNewEmployeeModalOpen } from "../../slices/employees";
 
 interface SideIcons {
 	name: string;
@@ -15,8 +16,11 @@ interface SideIcons {
 
 const SideIcons = ({ name, icon: Icon, className, img }: SideIcons) => {
 	const { actualPage } = useSelector((state: RootState) => state.pages);
+	const { completedFirstStage } = useSelector(
+		(state: RootState) => state.stages,
+	);
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	const isSelected = actualPage === name;
 
@@ -28,9 +32,10 @@ const SideIcons = ({ name, icon: Icon, className, img }: SideIcons) => {
 				type="button"
 				className={`group flex items-center gap-2 ${className}`}
 				onClick={() => {
-					if (name !== "employees") {
-						dispatch(selectActualStage(1));
+					if (name === "employees" && completedFirstStage) {
+						dispatch(completeFirstStage());
 					}
+					dispatch(setIsNewEmployeeModalOpen(false));
 					dispatch(selectPage(name));
 				}}
 			>

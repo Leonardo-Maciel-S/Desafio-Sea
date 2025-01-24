@@ -33,9 +33,10 @@ export default {
 			},
 
 			boxShadow: {
-				stagesCards: "0px 6px 8px rgba(0, 0, 0, 0.3)", // opacity 30
+				stagesCards: "0px 6px 8px rgba(0, 0, 0, 0.3)",
 				stagesCardsHover: "0px 6px 8px rgba(0, 0, 0, 0.4)",
 				fieldset: "0px 4px 4px 0px rgba(0, 0, 0, 0.15)",
+				closeInfo: "0px 6px 8px rgba(0, 0, 0, 0.35)",
 			},
 			screens: {
 				phone: "360px",

@@ -1,20 +1,23 @@
 import { useContext } from "react";
 
 import Fieldset from "../../inputs/Fieldset";
-import InputRadio from "../../inputs/InputRadio";
 import Label from "../../inputs/Label";
-import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
+import { EditEmployeeContext } from "../../../context/EditEmployeeContext";
+import InputRadio from "../../inputs/InputRadio";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../store";
 
 export const PersonalDatas = () => {
-	const context = useContext(NewEmployeeContext);
+	const context = useContext(EditEmployeeContext);
 	if (!context) return;
+
+	const { employeeToEdit } = useSelector((state: RootState) => state.employees);
+	if (!employeeToEdit) return;
 
 	const {
 		register,
 		formState: { errors },
 	} = context.formMethods;
-
-	console.log(errors);
 
 	const options = ["Frontend", "Backend", "Designer"];
 
@@ -25,20 +28,20 @@ export const PersonalDatas = () => {
 					type="text"
 					placeholder="Digite seu nome"
 					className={`input ${errors.name && "error"}`}
-					{...register("name")}
+					{...register("name", { value: employeeToEdit.name })}
 				/>
 			</Label>
 
 			<div className={`flex flex-col flex-1 gap-[8px] `}>
 				<span className="font-medium text-base">Sexo</span>
 
-				<InputRadio isNew />
+				<InputRadio />
 			</div>
 
 			<Label name="CPF" minWidth>
 				<input
 					className={`input ${errors.cpf && "error"}`}
-					{...register("cpf")}
+					{...register("cpf", { value: employeeToEdit.cpf })}
 					type="text"
 					placeholder="CPF"
 				/>
@@ -48,14 +51,14 @@ export const PersonalDatas = () => {
 				<input
 					type="date"
 					className={`input ${errors.birth && "error"}`}
-					{...register("birth")}
+					{...register("birth", { value: employeeToEdit.birth })}
 				/>
 			</Label>
 
 			<Label name="RG" className="flex-1" minWidth>
 				<input
 					className={`input ${errors.RG && "error"}`}
-					{...register("RG")}
+					{...register("RG", { value: employeeToEdit.RG })}
 					type="text"
 					placeholder="RG"
 				/>
@@ -66,18 +69,19 @@ export const PersonalDatas = () => {
 					className={`input h-9 flex justify-between items-center ${errors.job && "error"} xl:min-w-[250px]`}
 				>
 					<select
-						{...register("job")}
-						defaultValue={""}
+						{...register("job", { value: employeeToEdit.job })}
 						className="bg-transparent w-full flex justify-between items-center gap-2 "
 					>
-						<option value="" disabled>
-							Selecione uma opção
-						</option>
-						{options.map((option) => (
-							<option key={option} value={option}>
-								{option}
-							</option>
-						))}
+						<option value={employeeToEdit.job}>{employeeToEdit.job}</option>
+						{options.map((option) => {
+							if (option !== employeeToEdit.job) {
+								return (
+									<option key={option} value={option}>
+										{option}
+									</option>
+								);
+							}
+						})}
 					</select>
 				</div>
 			</Label>

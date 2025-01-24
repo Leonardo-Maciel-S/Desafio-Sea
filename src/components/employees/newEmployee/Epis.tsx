@@ -4,24 +4,6 @@ import Label from "../../inputs/Label";
 import { NewEmployeeContext } from "../../../context/NewEmployeeContext";
 
 export const Epis = ({ activityNumber }: { activityNumber: number }) => {
-	const [listOfEpi, setListOfEpi] = useState([0]);
-
-	const handleAddEpi = (method: string, position?: number) => {
-		if (method === "add") {
-			const lastIndex = listOfEpi.length - 1;
-			setListOfEpi([...listOfEpi, listOfEpi[lastIndex] + 1]);
-
-			return;
-		}
-
-		const newList = listOfEpi.filter((item) => {
-			unregister(`activities.${activityNumber}`);
-			return item !== position;
-		});
-
-		setListOfEpi([...newList]);
-	};
-
 	const context = useContext(NewEmployeeContext);
 	if (!context) return;
 
@@ -31,7 +13,26 @@ export const Epis = ({ activityNumber }: { activityNumber: number }) => {
 		formState: { errors },
 	} = context.formMethods;
 
-	const options = ["Cinto", "Capacete"];
+	const [listOfEpi, setListOfEpi] = useState([0]);
+
+	const handleAddEpi = (method: string, position: number) => {
+		unregister("activities");
+
+		if (method === "add") {
+			const lastIndex = listOfEpi.length - 1;
+			setListOfEpi([...listOfEpi, listOfEpi[lastIndex] + 1]);
+
+			return;
+		}
+
+		const newList = listOfEpi.filter((item, index) => {
+			return index !== position;
+		});
+
+		setListOfEpi([...newList]);
+	};
+
+	const options = ["Cinto", "Capacete", "Bota"];
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -41,18 +42,18 @@ export const Epis = ({ activityNumber }: { activityNumber: number }) => {
 						<span className="text-sm font-medium">Selecione o EPI:</span>
 
 						<div
-							className={`input h-9 flex justify-between items-center ${errors.activities?.[activityNumber]?.epi?.[item]?.name && "error"}`}
+							className={`input h-9 flex justify-between items-center ${errors.activities?.[activityNumber]?.epi?.[index]?.name && "error"}`}
 						>
 							<select
 								{...register(
-									`activities.${activityNumber}.epi.${item}.name`,
+									`activities.${activityNumber}.epi.${index}.name`,
 									{},
 								)}
 								defaultValue={""}
 								className="bg-transparent w-full flex justify-between items-center gap-2 "
 							>
 								<option value="" disabled>
-									Selecione uma opção {item}
+									Selecione uma opção
 								</option>
 								{options.map((option) => (
 									<option key={option} value={option}>
@@ -67,8 +68,8 @@ export const Epis = ({ activityNumber }: { activityNumber: number }) => {
 						<input
 							type="text"
 							placeholder="Digite o número"
-							className={`input py-2 ${errors.activities?.[activityNumber]?.epi?.[item]?.ca && "error"}`}
-							{...register(`activities.${activityNumber}.epi.${item}.ca`)}
+							className={`input py-2 ${errors.activities?.[activityNumber]?.epi?.[index]?.ca && "error"}`}
+							{...register(`activities.${activityNumber}.epi.${index}.ca`)}
 						/>
 					</Label>
 
@@ -77,7 +78,7 @@ export const Epis = ({ activityNumber }: { activityNumber: number }) => {
 							<Button
 								className="font-normal min-w-52 py-[8px] flex-1 w-full"
 								isEnable
-								onClick={() => handleAddEpi("delete", item)}
+								onClick={() => handleAddEpi("delete", index)}
 							>
 								Excluir EPI
 							</Button>
@@ -85,7 +86,7 @@ export const Epis = ({ activityNumber }: { activityNumber: number }) => {
 							<Button
 								className="font-normal min-w-52 py-[8px] flex-1 w-full"
 								isEnable
-								onClick={() => handleAddEpi("add", item)}
+								onClick={() => handleAddEpi("add", index)}
 							>
 								Adicionar EPI
 							</Button>

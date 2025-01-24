@@ -2,8 +2,8 @@ import person from "../../assets/person.svg";
 
 const Profile = () => {
 	return (
-		<div className="bg-white w-[60%] rounded-default p-6 flex flex-col gap-8">
-			<p className="text-xs 2xl:text-base text-mediumGray ">
+		<div className="bg-white xl:w-[60%] rounded-default p-6 flex flex-col gap-8">
+			<p className="text-sm 2xl:text-base text-mediumGray ">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In suscipit
 				suscipit porttitor. Suspendisse ex lorem, rhoncus nec ante eu, venenatis
 				aliquam turpis. Nulla facilisi. Curabitur nec mattis dolor. Nulla
