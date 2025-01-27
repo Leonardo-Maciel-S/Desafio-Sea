@@ -27,7 +27,6 @@
 - Controle de versão: git
 - Repositório remoto: Github
 - Validação de formulário: React Hook Form + Zod
-- 
   
 # Get started
 - Clone o repositório
