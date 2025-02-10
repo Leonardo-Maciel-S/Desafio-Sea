@@ -2,6 +2,7 @@ import Button from "../buttons/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsNewEmployeeModalOpen } from "../../slices/employees";
 import type { RootState } from "../../store";
+import { completeFirstStage } from "../../slices/stages";
 
 interface FiltersEmployeeProps {
 	onlyActive: boolean;
@@ -14,6 +15,10 @@ const FiltersEmployee = ({
 }: FiltersEmployeeProps) => {
 	const { listOfEmployees } = useSelector(
 		(state: RootState) => state.employees,
+	);
+
+	const { completedFirstStage } = useSelector(
+		(state: RootState) => state.stages,
 	);
 
 	const qtdTotal = listOfEmployees.length;
@@ -34,6 +39,9 @@ const FiltersEmployee = ({
 				textSize="base16"
 				onClick={() => {
 					dispatch(setIsNewEmployeeModalOpen(true));
+					if (completedFirstStage) {
+						dispatch(completeFirstStage());
+					}
 				}}
 			>
 				+ Adicionar Funcionário
