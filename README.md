@@ -45,3 +45,20 @@ npx json-server db.json
 - Em outra aba do terminal inicie o projeto
 ```
 npm run dev
+```
+
+## Telas
+### Inicial
+- Onde é possível ver todos os funcionários, filtar por apenas ativos, editar ou excluir.
+![Image](https://github.com/user-attachments/assets/0fa0d6fc-1c9c-4a2f-af4f-9a2510a80f00)
+![Image](https://github.com/user-attachments/assets/6a9c2d8c-5a87-490d-9450-360c99375fb0)
+
+### Botão de Editar/Excluir
+- Menu dropdown que aparece quando clica no ... e filtro apenas ativo.
+![Image](https://github.com/user-attachments/assets/20c42ba3-58de-4979-8eb0-9d8beb1b7a1b)
+
+### Etapa concluída
+- Quando marcado a chave de "etapa concluída" libera outras paginas.
+![Image](https://github.com/user-attachments/assets/cf37d2c0-68e8-4719-9168-3c0ffa7149f3)
+- Onde podemos avançar para a proxima com o botão no rodapé ou pelas etapas na parte superior
+![Image](https://github.com/user-attachments/assets/262431ca-b749-423c-aa11-36fc5215a856)
